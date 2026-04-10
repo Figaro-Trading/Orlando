@@ -65,11 +65,11 @@ header h1 {
   display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.6rem; align-items: center;
 }
 .refresh-btn {
-  padding: 0.4rem 1.2rem; background: #2a2d3a; color: var(--text);
-  border: 1px solid #3a3d4a; border-radius: 8px; cursor: pointer;
+  padding: 0.4rem 1.2rem; background: var(--border); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
   font-size: 0.8rem; transition: background 0.2s;
 }
-.refresh-btn:hover { background: #3a3d4a; }
+.refresh-btn:hover { background: var(--muted); color: var(--bg); }
 .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .last-update { color: var(--muted); font-size: 0.75rem; }
 .stale-badge {
@@ -270,7 +270,7 @@ header h1 {
   border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
   transition: background 0.2s;
 }
-.ecard:hover { background: #22253a; }
+.ecard:hover { background: var(--bg); }
 .ecard.is-done { opacity: 0.4; }
 .sbar { width: 4px; flex-shrink: 0; }
 .sbar.s-open { background: var(--low); }
