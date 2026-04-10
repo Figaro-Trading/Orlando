@@ -1,4 +1,4 @@
-import { activeParkKey, activeTemplateId } from "../../state/app-state";
+import { activeParkKey } from "../../state/app-state";
 import { completedIds, markCompleted, removeCompletion } from "../../state/user-progress";
 import { userPosition } from "../../state/geo-state";
 import { ALL_TEMPLATES } from "../../data/templates";
@@ -48,8 +48,6 @@ export function Dashboard() {
     z.entries.filter((e) => isActionable(e.type)),
   );
 
-  const completedCount = entries.filter((e) => completedIds.value.has(e.id)).length;
-
   const handleToggle = (entry: PlanEntry) => {
     if (completedIds.value.has(entry.id)) {
       removeCompletion(entry.id);
@@ -79,14 +77,7 @@ export function Dashboard() {
         {entries.map((entry) => {
           const isDone = completedIds.value.has(entry.id);
           return (
-            <div
-              key={entry.id}
-              class={`checklist-row ${isDone ? "is-done" : ""}`}
-              onClick={() => handleToggle(entry)}
-            >
-              <div class={`checklist-check ${isDone ? "checked" : ""}`}>
-                {isDone ? "✓" : ""}
-              </div>
+            <div key={entry.id} class={`checklist-row ${isDone ? "is-done" : ""}`}>
               <div class="checklist-info">
                 <div class="checklist-name">
                   {entry.isMustSee && <span style="color:var(--mid);margin-right:4px;">★</span>}
@@ -107,6 +98,11 @@ export function Dashboard() {
                   )}
                 </div>
               </div>
+              {isDone ? (
+                <button class="undo-btn" onClick={() => handleToggle(entry)}>Annuler</button>
+              ) : (
+                <button class="done-btn" onClick={() => handleToggle(entry)}>Fait !</button>
+              )}
             </div>
           );
         })}

@@ -17,7 +17,7 @@ export function Header() {
 
   return (
     <header>
-      <h1>Orlando</h1>
+      <h1>🏰 ORLANDO 🏰</h1>
       <div class="trip-info">
         <span class="today-marker">{parkName}</span>
       </div>

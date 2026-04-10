@@ -40,13 +40,22 @@ main {
 header {
   text-align: center;
   padding: 1.5rem 1rem 0.75rem;
-  background: linear-gradient(135deg, #1a1d27, #0f1117);
+  background: var(--card);
   border-bottom: 1px solid var(--border);
 }
 header h1 {
   font-size: 1.6rem;
   font-weight: 700;
+  color: var(--text);
+}
+[data-theme="dark"] header h1,
+:root header h1 {
   background: linear-gradient(135deg, #5eaaff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[data-theme="light"] header h1 {
+  background: linear-gradient(135deg, #2a6cb8, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -72,7 +81,7 @@ header h1 {
 .navbar {
   position: fixed; bottom: 0; left: 0; right: 0;
   display: flex; justify-content: space-around; align-items: center;
-  background: var(--card); border-top: 1px solid var(--border);
+  background: var(--card); border-top: 1px solid var(--border); color: var(--text);
   padding: 0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom)); z-index: 50;
 }
 .nav-item {
@@ -130,17 +139,13 @@ header h1 {
   display: flex; align-items: center; gap: 0.75rem;
   padding: 0.6rem 0.8rem; background: var(--card);
   border: 1px solid var(--border); border-radius: 10px;
-  cursor: pointer; transition: opacity 0.2s; min-height: 48px;
+  transition: opacity 0.2s; min-height: 48px;
 }
-.checklist-row.is-done { opacity: 0.4; }
-.checklist-check {
-  width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
-  border: 2px solid var(--border); display: flex; align-items: center;
-  justify-content: center; font-size: 0.8rem; font-weight: 700;
-  transition: all 0.2s;
-}
-.checklist-check.checked {
-  background: var(--low); border-color: var(--low); color: #fff;
+.checklist-row.is-done { opacity: 0.45; }
+.undo-btn {
+  padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.72rem;
+  font-weight: 600; cursor: pointer; min-height: 32px; white-space: nowrap;
+  background: rgba(255,159,10,0.15); color: var(--mid); border: 1px solid rgba(255,159,10,0.3);
 }
 .checklist-info { flex: 1; min-width: 0; }
 .checklist-name {

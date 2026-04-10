@@ -1,6 +1,4 @@
-import { completedEntityIds, markCompleted } from "../../state/user-progress";
-import { activeParkKey, activeTemplateId } from "../../state/app-state";
-import { userPosition } from "../../state/geo-state";
+import { activeTemplateId } from "../../state/app-state";
 import { sbc } from "../../utils/format";
 import { ft } from "../../utils/time";
 import { trend, findLand } from "../../utils/entity";
@@ -16,7 +14,6 @@ import type { LiveEntity, ParkKey, PlanEntry } from "../../types";
 interface Props { entity: LiveEntity; parkKey: ParkKey; }
 
 export function EntityCard({ entity, parkKey }: Props) {
-  const isDone = completedEntityIds.value.has(entity.id);
   const waitTime = entity.queue?.STANDBY?.waitTime ?? null;
   const sr = entity.queue?.SINGLE_RIDER?.waitTime;
   const rt = entity.queue?.RETURN_TIME;
@@ -27,19 +24,6 @@ export function EntityCard({ entity, parkKey }: Props) {
   const template = getTemplate(activeTemplateId.value);
   const planEntry = template ? findPlanEntryForEntityId(entity.id, template) : null;
   const isInPlan = isPlanEntryInPlan(parkKey, entity.name);
-
-  const handleDone = () => {
-    let planEntryId = entity.id;
-    if (planEntry) planEntryId = planEntry.id;
-    markCompleted({
-      entityId: entity.id,
-      planEntryId,
-      completedAt: new Date().toISOString(),
-      park: activeParkKey.value,
-      land: findLand(parkKey, entity.name) ?? undefined,
-      gpsPosition: userPosition.value ? { lat: userPosition.value.lat, lon: userPosition.value.lon } : undefined,
-    });
-  };
 
   const handleAddToPlan = (e: Event) => {
     e.stopPropagation();
@@ -65,7 +49,7 @@ export function EntityCard({ entity, parkKey }: Props) {
   };
 
   return (
-    <div class={`ecard ${isDone ? "is-done" : ""}`}>
+    <div class="ecard">
       <div class={`sbar ${sbc(entity.status)}`} />
       <div class="ecard-in">
         <div class="einfo">
@@ -115,11 +99,8 @@ export function EntityCard({ entity, parkKey }: Props) {
           ) : (
             <StatusBadge status={entity.status} />
           )}
-          {!isDone && !isInPlan && entity.status === "OPERATING" && (
+          {!isInPlan && entity.status === "OPERATING" && (
             <button class="add-plan-btn" onClick={handleAddToPlan} title="Ajouter au planning">+</button>
-          )}
-          {!isDone && entity.status === "OPERATING" && (
-            <button class="done-btn" onClick={handleDone}>Fait !</button>
           )}
         </div>
       </div>

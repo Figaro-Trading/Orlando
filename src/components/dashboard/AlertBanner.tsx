@@ -20,7 +20,7 @@ export function AlertBanner() {
     <div class="alert-banner">
       {parkAlerts.map((alert, i) => (
         <div class="alert-banner-item" key={`a-${i}`}>
-          {icon(alert.severity)} {alert.message}
+          {icon(alert.severity)} {alert.attraction ? <strong>{alert.attraction}</strong> : null}{alert.attraction ? " — " : ""}{alert.message}
         </div>
       ))}
       {parkLL.map((ll, i) => (
