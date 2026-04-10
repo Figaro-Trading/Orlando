@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 import { resolve } from "path";
 
 export default defineConfig({
+  base: "/Orlando/",
   plugins: [
     preact(),
     VitePWA({
@@ -17,8 +18,8 @@ export default defineConfig({
         background_color: "#0f1117",
         display: "standalone",
         orientation: "portrait",
-        scope: "/",
-        start_url: "/",
+        scope: "/Orlando/",
+        start_url: "/Orlando/",
         icons: [
           { src: "icons/icon-192.png", sizes: "192x192", type: "image/png" },
           { src: "icons/icon-512.png", sizes: "512x512", type: "image/png" },
