@@ -84,10 +84,10 @@ export function EntityCard({ entity, parkKey }: Props) {
               )}
               {sr != null && <span class="bsm b-sr">SR {sr}min</span>}
               {rt?.state === "AVAILABLE" && rt.returnStart && (
-                <span class="bsm b-ll">LL {ft(rt.returnStart)}</span>
+                <span class="bsm b-ll">LL-M {ft(rt.returnStart)}</span>
               )}
               {prt?.state === "AVAILABLE" && prt.returnStart && (
-                <span class="bsm b-ill">ILL {ft(prt.returnStart)}</span>
+                <span class="bsm b-ill">LL-S {ft(prt.returnStart)}</span>
               )}
               {bg?.allocationStatus === "AVAILABLE" && bg.currentGroupStart != null && (
                 <span class="bsm b-vq">VQ gr.{bg.currentGroupStart}-{bg.currentGroupEnd}</span>
