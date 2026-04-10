@@ -102,7 +102,7 @@ export function PlanningView() {
                 </optgroup>
               ))}
             </select>
-            <button class="plan-row-remove" onClick={() => handleRemove(i)}>
+            <button class="plan-row-remove" aria-label="Remove" onClick={() => handleRemove(i)}>
               ✕
             </button>
           </div>

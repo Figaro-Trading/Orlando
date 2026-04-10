@@ -28,7 +28,7 @@ export function ParkBanner({ parkKey }: Props) {
     if (w > maxWait) { maxWait = w; maxName = a.name.substring(0, 18); }
   }
 
-  const avgColor = avg > 90 ? "var(--high)" : avg > 45 ? "#f4a540" : "var(--low)";
+  const avgColor = avg > 90 ? "var(--high)" : avg > 45 ? "var(--mid)" : "var(--low)";
 
   return (
     <div class="park-banner">

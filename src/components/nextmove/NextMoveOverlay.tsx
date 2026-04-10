@@ -140,7 +140,7 @@ export function NextMoveOverlay() {
   if (!template) {
     return (
       <div class="overlay">
-        <button class="overlay-close" onClick={handleClose}>
+        <button class="overlay-close" aria-label="Close" onClick={handleClose}>
           ✕
         </button>
         <div style="padding:3rem 1rem;text-align:center;color:var(--muted);">
@@ -166,7 +166,7 @@ export function NextMoveOverlay() {
     <div class="overlay">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
         <span style="font-size:1.1rem;font-weight:700;">What's next?</span>
-        <button class="overlay-close" style="position:static;" onClick={handleClose}>
+        <button class="overlay-close" style="position:static;" aria-label="Close" onClick={handleClose}>
           ✕
         </button>
       </div>
