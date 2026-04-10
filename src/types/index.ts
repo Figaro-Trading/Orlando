@@ -63,26 +63,7 @@ export type DayTemplate = {
   alerts: string[];
 };
 
-// ──────────────────────────────────────
-// Trip Day Types
-// ──────────────────���───────────────────
-
-export type DayAlternative = {
-  templateId: string;
-  label: string;
-  reason: string;
-};
-
-export type TripDay = {
-  date: string;
-  dayIndex: number;
-  templates: string[];
-  activeTemplateId: string;
-  isMultiPark: boolean;
-  alternatives?: DayAlternative[];
-};
-
-// ────────────────────────��─────────────
+// ────────────────────────────────────
 // User Progress Types
 // ──────────────���───────────────────────
 
@@ -191,6 +172,7 @@ export type ParkConfig = {
   id: string;
   name: string;
   short: string;
+  center: { lat: number; lon: number };
 };
 
 export type ParkKey = "mk" | "epcot" | "hs" | "ak" | "usf" | "ioa" | "epic";

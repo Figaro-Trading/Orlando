@@ -6,11 +6,12 @@ import { ft } from "../../utils/time";
 import { trend, findLand } from "../../utils/entity";
 import { findPlanEntryForEntityId } from "../../utils/matching";
 import { getTemplate } from "../../data/templates";
+import { isPlanEntryInPlan, addPlanRow } from "../../state/user-plan";
 import { TYPE_LBL } from "../../data/labels";
 import { WaitBadge } from "../shared/WaitBadge";
 import { StatusBadge } from "../shared/StatusBadge";
 import { ShowtimePills } from "../shared/ShowtimePills";
-import type { LiveEntity, ParkKey } from "../../types";
+import type { LiveEntity, ParkKey, PlanEntry } from "../../types";
 
 interface Props { entity: LiveEntity; parkKey: ParkKey; }
 
@@ -22,13 +23,14 @@ export function EntityCard({ entity, parkKey }: Props) {
   const prt = entity.queue?.PAID_RETURN_TIME;
   const bg = entity.queue?.BOARDING_GROUP;
 
+  // Enriched data from template
+  const template = getTemplate(activeTemplateId.value);
+  const planEntry = template ? findPlanEntryForEntityId(entity.id, template) : null;
+  const isInPlan = isPlanEntryInPlan(parkKey, entity.name);
+
   const handleDone = () => {
-    const template = getTemplate(activeTemplateId.value);
     let planEntryId = entity.id;
-    if (template) {
-      const pe = findPlanEntryForEntityId(entity.id, template);
-      if (pe) planEntryId = pe.id;
-    }
+    if (planEntry) planEntryId = planEntry.id;
     markCompleted({
       entityId: entity.id,
       planEntryId,
@@ -39,6 +41,29 @@ export function EntityCard({ entity, parkKey }: Props) {
     });
   };
 
+  const handleAddToPlan = (e: Event) => {
+    e.stopPropagation();
+    const land = findLand(parkKey, entity.name) ?? "";
+    const entry: PlanEntry = {
+      id: `${parkKey}-add-${Date.now()}`,
+      name: entity.name,
+      type: entity.entityType === "SHOW" ? "show" : entity.entityType === "RESTAURANT" ? "meal" : "ride",
+      land,
+      duration: planEntry?.duration,
+      rideType: planEntry?.rideType,
+      popularity: planEntry?.popularity,
+      estimatedWait: planEntry?.estimatedWait,
+      rating: planEntry?.rating,
+      isNew: false,
+      isReride: false,
+      isMustSee: false,
+      priority: 3,
+      isOptional: false,
+      isRopeDrop: false,
+    };
+    addPlanRow(parkKey, entry);
+  };
+
   return (
     <div class={`ecard ${isDone ? "is-done" : ""}`}>
       <div class={`sbar ${sbc(entity.status)}`} />
@@ -47,6 +72,20 @@ export function EntityCard({ entity, parkKey }: Props) {
           <div class="ename">{entity.name}</div>
           <div class="esub">
             <span class="etype">{TYPE_LBL[entity.entityType] || entity.entityType}</span>
+            {planEntry?.rideType && (
+              <span class="etype">· {planEntry.rideType}</span>
+            )}
+            {planEntry?.duration && (
+              <span class="etype">· {planEntry.duration}min</span>
+            )}
+            {planEntry?.popularity && (
+              <span class={`bsm ${planEntry.popularity >= 7 ? "b-pop-high" : planEntry.popularity >= 4 ? "b-pop-mid" : "b-pop-low"}`}>
+                Pop. {planEntry.popularity.toFixed(1)}
+              </span>
+            )}
+            {planEntry?.rating && (
+              <span class="etype">· ★{planEntry.rating.toFixed(1)}</span>
+            )}
             <span class="eupd">· Maj {ft(entity.lastUpdated)}</span>
           </div>
         </div>
@@ -55,6 +94,9 @@ export function EntityCard({ entity, parkKey }: Props) {
             <>
               {waitTime != null && waitTime >= 0 && (
                 <WaitBadge waitTime={waitTime} trendDir={trend(entity)} />
+              )}
+              {planEntry?.estimatedWait && waitTime == null && (
+                <span class="bsm" style="color:var(--muted)">~{planEntry.estimatedWait}min</span>
               )}
               {sr != null && <span class="bsm b-sr">SR {sr}min</span>}
               {rt?.state === "AVAILABLE" && rt.returnStart && (
@@ -72,6 +114,9 @@ export function EntityCard({ entity, parkKey }: Props) {
             </>
           ) : (
             <StatusBadge status={entity.status} />
+          )}
+          {!isDone && !isInPlan && entity.status === "OPERATING" && (
+            <button class="add-plan-btn" onClick={handleAddToPlan} title="Ajouter au planning">+</button>
           )}
           {!isDone && entity.status === "OPERATING" && (
             <button class="done-btn" onClick={handleDone}>Fait !</button>

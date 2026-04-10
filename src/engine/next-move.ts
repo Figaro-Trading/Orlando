@@ -4,7 +4,6 @@ import type {
   ReasoningSummary,
   PlanEntry,
   DayTemplate,
-  TripDay,
   LiveEntity,
   ParkAlert,
   CompletionEvent,
@@ -21,7 +20,6 @@ import { liveEntityMap } from "../state/live-cache";
 
 export type NextMoveInput = {
   activeTemplate: DayTemplate;
-  tripDay: TripDay;
   completedIds: Set<string>;
   completedEntityIds: Set<string>;
   skippedIds: Set<string>;
@@ -51,7 +49,6 @@ export function computeNextMove(input: NextMoveInput): NextMoveResult {
   // Step 1: Plan Analysis
   const plan = analyzePlan({
     activeTemplate: input.activeTemplate,
-    tripDay: input.tripDay,
     completedIds: input.completedIds,
     skippedIds: input.skippedIds,
     now,

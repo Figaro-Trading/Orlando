@@ -1,4 +1,4 @@
-import { activeParkKey, maxWaitThreshold } from "../../state/app-state";
+import { activeParkKey, parkMode, maxWaitThreshold, maxPopularityThreshold, themeMode } from "../../state/app-state";
 import { resetProgress } from "../../state/user-progress";
 import { gpsAvailable, gpsPermissionState } from "../../state/geo-state";
 import { PARKS, PARK_KEYS } from "../../data/parks";
@@ -6,23 +6,42 @@ import { LandPicker } from "./LandPicker";
 import type { ParkKey } from "../../types";
 
 export function Settings() {
+  const handleParkModeChange = (value: string) => {
+    if (value === "auto") {
+      parkMode.value = "auto";
+    } else if (value in PARKS) {
+      parkMode.value = value as ParkKey;
+      activeParkKey.value = value as ParkKey;
+    }
+  };
+
   return (
     <div class="panel active">
       <h2 style="font-size:1.2rem;margin-bottom:1rem;">Réglages</h2>
 
       <div class="settings-section">
-        <div class="settings-label">Parc actif</div>
-        <select class="settings-select" value={activeParkKey.value}
-          onChange={(e) => { activeParkKey.value = (e.target as HTMLSelectElement).value; }}>
+        <div class="settings-label">Parc par défaut</div>
+        <select class="settings-select" value={parkMode.value}
+          onChange={(e) => handleParkModeChange((e.target as HTMLSelectElement).value)}>
+          <option value="auto">Auto (GPS)</option>
           {PARK_KEYS.map((k) => <option key={k} value={k}>{PARKS[k].name}</option>)}
         </select>
+        {parkMode.value === "auto" && gpsAvailable.value && (
+          <div style="font-size:0.72rem;color:var(--low);margin-top:0.3rem;">
+            Parc détecté : {PARKS[activeParkKey.value].name}
+          </div>
+        )}
+        {parkMode.value === "auto" && gpsPermissionState.value === "denied" && (
+          <div style="font-size:0.72rem;color:var(--high);margin-top:0.3rem;">
+            GPS refusé — sélectionnez un parc manuellement
+          </div>
+        )}
       </div>
 
       <div class="settings-section">
         <div class="settings-label">
           Land actuel
           {gpsAvailable.value && <span style="color:var(--low);font-size:0.72rem;"> (GPS actif)</span>}
-          {gpsPermissionState.value === "denied" && <span style="color:var(--high);font-size:0.72rem;"> (GPS refusé)</span>}
         </div>
         <LandPicker />
       </div>
@@ -32,6 +51,28 @@ export function Settings() {
         <input type="range" class="settings-range" min="15" max="180" step="5"
           value={maxWaitThreshold.value}
           onInput={(e) => { maxWaitThreshold.value = Number((e.target as HTMLInputElement).value); }} />
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">Seuil popularité max : {maxPopularityThreshold.value}/10</div>
+        <input type="range" class="settings-range" min="1" max="10" step="1"
+          value={maxPopularityThreshold.value}
+          onInput={(e) => { maxPopularityThreshold.value = Number((e.target as HTMLInputElement).value); }} />
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">Thème</div>
+        <div class="theme-toggle">
+          {(["light", "dark", "auto"] as const).map((mode) => (
+            <button
+              key={mode}
+              class={`theme-btn ${themeMode.value === mode ? "active" : ""}`}
+              onClick={() => { themeMode.value = mode; }}
+            >
+              {mode === "light" ? "Jour" : mode === "dark" ? "Nuit" : "Auto"}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div class="settings-section">

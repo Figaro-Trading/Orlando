@@ -6,11 +6,15 @@ import {
   gpsPermissionState,
 } from "../state/geo-state";
 import type { GpsPosition, GpsErrorInfo } from "../state/geo-state";
-import { currentLand, activeParkKey } from "../state/app-state";
+import { currentLand, activeParkKey, parkMode } from "../state/app-state";
 import { entityLocations } from "../state/live-cache";
 import { haversineDistance, detectCurrentLand } from "../utils/geo";
 import { findLand } from "../utils/entity";
+import { PARKS, PARK_KEYS } from "../data/parks";
 import type { ParkKey } from "../types";
+
+const PARK_DETECTION_RADIUS = 2000; // 2km
+const PARK_SWITCH_HYSTERESIS = 500; // 500m closer required to switch
 
 const WATCH_OPTIONS_LOW: PositionOptions = {
   enableHighAccuracy: false,
@@ -112,6 +116,32 @@ function onSuccess(position: GeolocationPosition): void {
   gpsAvailable.value = true;
   gpsError.value = null;
   gpsPermissionState.value = "granted";
+
+  // Auto-detect park if in GPS mode
+  if (parkMode.value === "auto") {
+    let nearestPark: ParkKey | null = null;
+    let nearestDist = Infinity;
+    for (const k of PARK_KEYS) {
+      const c = PARKS[k].center;
+      const d = haversineDistance(newPos.lat, newPos.lon, c.lat, c.lon);
+      if (d < nearestDist) {
+        nearestDist = d;
+        nearestPark = k;
+      }
+    }
+    if (nearestPark && nearestDist < PARK_DETECTION_RADIUS) {
+      const currentPark = activeParkKey.value as ParkKey;
+      if (nearestPark !== currentPark) {
+        const currentDist = haversineDistance(
+          newPos.lat, newPos.lon,
+          PARKS[currentPark].center.lat, PARKS[currentPark].center.lon,
+        );
+        if (currentDist - nearestDist > PARK_SWITCH_HYSTERESIS) {
+          activeParkKey.value = nearestPark;
+        }
+      }
+    }
+  }
 
   // Auto-detect land if accuracy is good enough
   if (newPos.accuracy <= LAND_DETECTION_ACCURACY) {

@@ -49,6 +49,12 @@ export function markSkipped(planEntryId: string): void {
   skippedIds.value = next;
 }
 
+export function removeCompletion(planEntryId: string): void {
+  completionHistory.value = completionHistory.value.filter(
+    (e) => e.planEntryId !== planEntryId,
+  );
+}
+
 export function undoLastCompletion(): void {
   if (completionHistory.value.length === 0) return;
   completionHistory.value = completionHistory.value.slice(0, -1);

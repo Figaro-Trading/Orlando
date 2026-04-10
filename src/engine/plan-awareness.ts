@@ -1,8 +1,7 @@
-import type { DayTemplate, TemplateZone, PlanEntry, TripDay, DayAlternative } from "../types";
+import type { DayTemplate, TemplateZone, PlanEntry } from "../types";
 
 export type PlanContext = {
   activeTemplate: DayTemplate;
-  tripDay: TripDay;
   completedIds: Set<string>;
   skippedIds: Set<string>;
   now: Date;
@@ -23,12 +22,10 @@ export type PlanAwarenessResult = {
   nextPlannedEntry: PlanEntry | null;
   nextPlannedZone: number | null;
   activePark: string;
-  isMultiPark: boolean;
   isBeforeTransition: boolean;
   isAfterTransition: boolean;
   transitionTime: string | null;
   secondaryPark: string | null;
-  j4Alternatives: DayAlternative[];
   criticalTimings: CriticalTiming[];
   totalEntries: number;
   completedEntries: number;
@@ -36,7 +33,7 @@ export type PlanAwarenessResult = {
 };
 
 export function analyzePlan(context: PlanContext): PlanAwarenessResult {
-  const { activeTemplate, tripDay, completedIds, skippedIds, now } = context;
+  const { activeTemplate, completedIds, skippedIds, now } = context;
 
   const { zoneNumber, zoneLabel } = determineCurrentZone(activeTemplate, completedIds);
   const { isBeforeTransition, isAfterTransition, transitionTime } = evaluateTransition(activeTemplate, now);
@@ -68,12 +65,10 @@ export function analyzePlan(context: PlanContext): PlanAwarenessResult {
     nextPlannedEntry,
     nextPlannedZone,
     activePark,
-    isMultiPark: tripDay.isMultiPark,
     isBeforeTransition,
     isAfterTransition,
     transitionTime,
     secondaryPark,
-    j4Alternatives: tripDay.alternatives ?? [],
     criticalTimings,
     totalEntries: allActionable.length,
     completedEntries: completed,

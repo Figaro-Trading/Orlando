@@ -3,15 +3,16 @@ import { completionHistory, skippedIds } from "./user-progress";
 import {
   currentView,
   activeParkKey,
+  parkMode,
   currentLand,
   activeZone,
   filters,
   maxWaitThreshold,
-  selectedJ4Option,
+  maxPopularityThreshold,
+  themeMode,
   activeTemplateId,
 } from "./app-state";
 import type { AppView, EntityFilters } from "./app-state";
-import { TRIP_DAYS } from "../data/trip";
 import { ALL_TEMPLATES } from "../data/templates";
 import { todayOrlando } from "../utils/time";
 import {
@@ -79,7 +80,14 @@ function hydrateAppState(): void {
 
   const rawPark = localStorage.getItem("orl:activeParkKey");
   if (rawPark && rawPark in PARKS) {
-    activeParkKey.value = rawPark;
+    activeParkKey.value = rawPark as ParkKey;
+  }
+
+  const rawParkMode = localStorage.getItem("orl:parkMode");
+  if (rawParkMode) {
+    if (rawParkMode === "auto" || rawParkMode in PARKS) {
+      parkMode.value = rawParkMode as "auto" | ParkKey;
+    }
   }
 
   const rawLand = localStorage.getItem("orl:currentLand");
@@ -117,9 +125,17 @@ function hydrateAppState(): void {
     }
   }
 
-  const rawJ4 = localStorage.getItem("orl:selectedJ4Option");
-  if (rawJ4 && rawJ4 !== "null") {
-    selectedJ4Option.value = rawJ4;
+  const rawPopThreshold = localStorage.getItem("orl:maxPopularityThreshold");
+  if (rawPopThreshold) {
+    const num = parseInt(rawPopThreshold);
+    if (!isNaN(num) && num >= 1 && num <= 10) {
+      maxPopularityThreshold.value = num;
+    }
+  }
+
+  const rawTheme = localStorage.getItem("orl:themeMode");
+  if (rawTheme && ["light", "dark", "auto"].includes(rawTheme)) {
+    themeMode.value = rawTheme as "light" | "dark" | "auto";
   }
 }
 
@@ -159,44 +175,9 @@ function purgeOldCompletions(): void {
 }
 
 function resolveActiveTemplate(): void {
-  const today = todayOrlando();
-  const tripDay = TRIP_DAYS.find((d) => d.date === today);
-
-  if (!tripDay || tripDay.templates.length === 0) {
-    activeTemplateId.value = "";
-    return;
-  }
-
-  // Keep persisted value if still valid for today
-  if (activeTemplateId.value && ALL_TEMPLATES[activeTemplateId.value]) {
-    const validForToday =
-      tripDay.templates.includes(activeTemplateId.value) ||
-      tripDay.alternatives?.some(
-        (a) => a.templateId === activeTemplateId.value,
-      );
-    if (validForToday) return;
-  }
-
-  // J4 bonus day: use selectedJ4Option if valid
-  if (tripDay.alternatives && tripDay.alternatives.length > 0) {
-    if (
-      selectedJ4Option.value &&
-      tripDay.alternatives.some(
-        (a) => a.templateId === selectedJ4Option.value,
-      )
-    ) {
-      activeTemplateId.value = selectedJ4Option.value;
-    } else {
-      activeTemplateId.value = tripDay.templates[0];
-    }
-  } else {
-    activeTemplateId.value = tripDay.templates[0];
-  }
-
-  // Sync active park to match template
-  const template = ALL_TEMPLATES[activeTemplateId.value];
-  if (template) {
-    activeParkKey.value = template.park;
+  const pk = activeParkKey.value;
+  if (ALL_TEMPLATES[pk]) {
+    activeTemplateId.value = pk;
   }
 }
 
@@ -207,6 +188,7 @@ export function startPersistence(): void {
   effect(() => {
     safeWrite("orl:currentView", currentView.value);
     safeWrite("orl:activeParkKey", activeParkKey.value);
+    safeWrite("orl:parkMode", parkMode.value);
     safeWrite("orl:currentLand", currentLand.value ?? "null");
     safeWrite(
       "orl:activeZone",
@@ -214,7 +196,25 @@ export function startPersistence(): void {
     );
     safeWrite("orl:filters", JSON.stringify(filters.value));
     safeWrite("orl:maxWaitThreshold", String(maxWaitThreshold.value));
-    safeWrite("orl:selectedJ4Option", selectedJ4Option.value ?? "null");
+    safeWrite("orl:maxPopularityThreshold", String(maxPopularityThreshold.value));
+    safeWrite("orl:themeMode", themeMode.value);
+  });
+
+  // Sync activeTemplateId when activeParkKey changes
+  effect(() => {
+    const pk = activeParkKey.value;
+    if (ALL_TEMPLATES[pk]) {
+      activeTemplateId.value = pk;
+    }
+  });
+
+  // Theme application
+  effect(() => {
+    const mode = themeMode.value;
+    const resolved = mode === "auto"
+      ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      : mode;
+    document.documentElement.setAttribute("data-theme", resolved);
   });
 
   // User progress

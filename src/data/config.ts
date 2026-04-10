@@ -1,5 +1,3 @@
-export const TRIP_START = "2026-04-12";
-export const TRIP_END = "2026-04-22";
 export const FAMILY_SIZE = 4;
 export const API_BASE = "https://api.themeparks.wiki/v1";
 export const TZ = "America/New_York";

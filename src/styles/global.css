@@ -15,6 +15,16 @@
   --mid: #ff9f0a;
   --high: #ff453a;
 }
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --border: #d1d1d6;
+  --text: #1c1c1e;
+  --muted: #8e8e93;
+  --low: #28a745;
+  --mid: #e67e00;
+  --high: #dc3545;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -114,6 +124,37 @@ header h1 {
 }
 .template-picker { margin-bottom: 0.75rem; }
 
+/* Checklist (Dashboard) */
+.checklist { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.checklist-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0.8rem; background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px;
+  cursor: pointer; transition: opacity 0.2s; min-height: 48px;
+}
+.checklist-row.is-done { opacity: 0.4; }
+.checklist-check {
+  width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
+  border: 2px solid var(--border); display: flex; align-items: center;
+  justify-content: center; font-size: 0.8rem; font-weight: 700;
+  transition: all 0.2s;
+}
+.checklist-check.checked {
+  background: var(--low); border-color: var(--low); color: #fff;
+}
+.checklist-info { flex: 1; min-width: 0; }
+.checklist-name {
+  font-weight: 600; font-size: 0.88rem; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.checklist-meta {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.72rem; color: var(--muted); margin-top: 2px; flex-wrap: wrap;
+}
+.checklist-type { font-weight: 600; }
+.checklist-land { }
+.checklist-dur { }
+
 /* Settings */
 .settings-section { margin-bottom: 1.2rem; }
 .settings-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
@@ -127,37 +168,60 @@ header h1 {
   border: 1px solid rgba(255,69,58,0.3); border-radius: 8px;
   cursor: pointer; font-size: 0.85rem;
 }
+.settings-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+.theme-toggle { display: flex; gap: 0.3rem; }
+.theme-btn {
+  flex: 1; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted); cursor: pointer;
+  font-size: 0.82rem; font-weight: 600; min-height: 44px; transition: all 0.2s;
+}
+.theme-btn.active { background: rgba(94,170,255,0.13); color: #5eaaff; border-color: #5eaaff; }
 
-/* Planning grid */
-.planning-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.planning-grid table { width: 100%; border-collapse: collapse; min-width: 750px; }
-.planning-grid th, .planning-grid td {
-  padding: 0.5rem 0.4rem; text-align: center;
-  border: 1px solid var(--border); font-size: 0.75rem; vertical-align: top;
+/* Planning tabs & rows */
+.plan-tabs {
+  display: flex; gap: 0.3rem; overflow-x: auto; padding-bottom: 0.3rem;
+  -webkit-overflow-scrolling: touch;
 }
-.planning-grid th {
-  background: var(--card); color: var(--muted); font-weight: 600;
-  position: sticky; top: 0; font-size: 0.72rem;
+.plan-tab {
+  padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted); cursor: pointer;
+  font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+  min-height: 40px; transition: all 0.2s;
 }
-.planning-grid th.park-col-mk { border-bottom: 2px solid var(--mk); }
-.planning-grid th.park-col-epcot { border-bottom: 2px solid var(--epcot); }
-.planning-grid th.park-col-hs { border-bottom: 2px solid var(--hs); }
-.planning-grid th.park-col-ak { border-bottom: 2px solid var(--ak); }
-.planning-grid th.park-col-usf { border-bottom: 2px solid var(--usf); }
-.planning-grid th.park-col-ioa { border-bottom: 2px solid var(--ioa); }
-.planning-grid th.park-col-epic { border-bottom: 2px solid var(--epic); }
-.planning-grid td { background: rgba(255,255,255,0.02); }
-.planning-grid tr.today-row td { background: rgba(94,170,255,0.06); }
-.planning-grid tr.today-row td:first-child { font-weight: 700; color: #5eaaff; }
-.planning-grid .day-cell { font-weight: 600; white-space: nowrap; min-width: 65px; color: var(--text); }
-.planning-grid .hours-main { font-weight: 600; color: var(--text); font-size: 0.8rem; }
-.planning-grid .hours-extra { font-size: 0.68rem; color: #e8d46a; margin-top: 2px; }
-.planning-grid .hours-event { font-size: 0.68rem; color: #c084fc; margin-top: 2px; }
-.planning-grid .hours-ll { font-size: 0.68rem; color: #6bd88b; margin-top: 2px; }
-.planning-grid .hours-closed { color: var(--high); opacity: 0.6; }
-.planning-legend { display: flex; gap: 1rem; justify-content: center; margin-top: 0.75rem; flex-wrap: wrap; }
-.planning-legend span { font-size: 0.72rem; display: flex; align-items: center; gap: 0.3rem; }
-.legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.plan-tab.active { background: rgba(94,170,255,0.13); color: #5eaaff; border-color: #5eaaff; }
+.plan-rows { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.plan-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.4rem 0.6rem;
+}
+.plan-row-num {
+  font-size: 0.72rem; font-weight: 700; color: var(--muted);
+  min-width: 20px; text-align: center;
+}
+.plan-row-select {
+  flex: 1; padding: 0.45rem 0.4rem; background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: 6px; font-size: 0.82rem;
+  min-height: 40px;
+}
+.plan-row-remove {
+  background: none; border: none; color: var(--high); cursor: pointer;
+  font-size: 1rem; min-width: 32px; min-height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.6; transition: opacity 0.2s;
+}
+.plan-row-remove:hover { opacity: 1; }
+.plan-actions { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.plan-add-btn {
+  flex: 1; padding: 0.6rem; background: rgba(94,170,255,0.1); color: #5eaaff;
+  border: 1px dashed rgba(94,170,255,0.3); border-radius: 8px;
+  cursor: pointer; font-size: 0.85rem; font-weight: 600; min-height: 44px;
+}
+.plan-reset-btn {
+  padding: 0.6rem 1rem; background: rgba(255,69,58,0.1); color: var(--high);
+  border: 1px solid rgba(255,69,58,0.2); border-radius: 8px;
+  cursor: pointer; font-size: 0.82rem; min-height: 44px;
+}
 
 /* Park banner */
 .park-banner {
@@ -259,6 +323,19 @@ header h1 {
   transition: all 0.2s; min-height: 48px; display: flex; align-items: center;
 }
 .fchip.on { background: rgba(94,170,255,0.13); color: #5eaaff; border-color: #5eaaff; }
+
+/* Popularity badges */
+.b-pop-high { background: rgba(255,69,58,0.12); color: var(--high); }
+.b-pop-mid { background: rgba(255,159,10,0.12); color: var(--mid); }
+.b-pop-low { background: rgba(52,199,89,0.12); color: var(--low); }
+
+/* Add to plan button */
+.add-plan-btn {
+  padding: 0.3rem 0.5rem; border-radius: 6px; font-size: 0.85rem;
+  font-weight: 700; cursor: pointer; min-height: 32px; min-width: 32px;
+  background: rgba(94,170,255,0.15); color: #5eaaff; border: 1px solid rgba(94,170,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
 
 /* Done button */
 .done-btn {

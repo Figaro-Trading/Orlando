@@ -4,7 +4,6 @@ import {
   activeParkKey,
   currentLand,
   maxWaitThreshold,
-  selectedJ4Option,
   activeTemplateId,
 } from "../../state/app-state";
 import {
@@ -15,17 +14,15 @@ import {
 } from "../../state/user-progress";
 import { liveEntityMap, entityLocations } from "../../state/live-cache";
 import { userPosition, gpsAvailable } from "../../state/geo-state";
-import { TRIP_DAYS } from "../../data/trip";
 import { ALL_TEMPLATES } from "../../data/templates";
 import { PARK_ALERTS } from "../../data/alerts";
-import { todayOrlando } from "../../utils/time";
 import { computeNextMove } from "../../engine/next-move";
 import {
   findNearbyExitCandidates,
   suggestExitCandidate,
 } from "../../engine/nearby";
 import { switchToHighAccuracy, switchToLowAccuracy } from "../../services/geolocation";
-import type { NextMoveResult, PlanEntry } from "../../types";
+import type { NextMoveResult, PlanEntry, ParkKey } from "../../types";
 import type { NearbyCandidate } from "../../engine/nearby";
 import { ExitPicker } from "./ExitPicker";
 import { BlockA } from "./BlockA";
@@ -41,10 +38,8 @@ export function NextMoveOverlay() {
   const exitCandidates = useSignal<NearbyCandidate[]>([]);
   const suggestedExit = useSignal<NearbyCandidate | null>(null);
 
-  const today = todayOrlando();
-  const tripDay = TRIP_DAYS.find((d) => d.date === today);
-  const templateId = activeTemplateId.value;
-  const template = templateId ? ALL_TEMPLATES[templateId] : null;
+  const templateId = activeTemplateId.value as ParkKey;
+  const template = templateId ? ALL_TEMPLATES[templateId] ?? null : null;
 
   // Switch to high accuracy GPS on mount
   useEffect(() => {
@@ -106,7 +101,7 @@ export function NextMoveOverlay() {
       });
     }
 
-    if (!template || !tripDay) return;
+    if (!template) return;
 
     // Build entity positions map
     const entityPositions = new Map<string, { lat: number; lon: number }>();
@@ -126,7 +121,6 @@ export function NextMoveOverlay() {
     // Run engine
     result.value = computeNextMove({
       activeTemplate: template,
-      tripDay,
       completedIds: completedIds.value,
       completedEntityIds: completedEntityIds.value,
       skippedIds: skippedIds.value,
@@ -143,7 +137,7 @@ export function NextMoveOverlay() {
   };
 
   // Edge case: no trip day or template
-  if (!tripDay || !template) {
+  if (!template) {
     return (
       <div class="overlay">
         <button class="overlay-close" onClick={handleClose}>
