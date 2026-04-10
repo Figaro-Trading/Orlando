@@ -29,7 +29,7 @@ import { BlockA } from "./BlockA";
 import { BlockB } from "./BlockB";
 import { BlockC } from "./BlockC";
 import { BlockD } from "./BlockD";
-import { useEffect } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
 
 export function NextMoveOverlay() {
   const phase = useSignal<"exit-pick" | "results">("exit-pick");
@@ -41,9 +41,47 @@ export function NextMoveOverlay() {
   const templateId = activeTemplateId.value as ParkKey;
   const template = templateId ? ALL_TEMPLATES[templateId] ?? null : null;
 
-  // Switch to high accuracy GPS on mount
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  // Switch to high accuracy GPS on mount + focus trap + Escape key
   useEffect(() => {
     switchToHighAccuracy();
+
+    const el = overlayRef.current;
+    if (el) {
+      const previouslyFocused = document.activeElement as HTMLElement | null;
+      el.focus();
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          handleClose();
+          return;
+        }
+        if (e.key === "Tab") {
+          const focusable = el.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          );
+          if (focusable.length === 0) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+
+      el.addEventListener("keydown", handleKeyDown);
+      return () => {
+        el.removeEventListener("keydown", handleKeyDown);
+        switchToLowAccuracy();
+        previouslyFocused?.focus();
+      };
+    }
+
     return () => switchToLowAccuracy();
   }, []);
 
@@ -139,7 +177,7 @@ export function NextMoveOverlay() {
   // Edge case: no trip day or template
   if (!template) {
     return (
-      <div class="overlay">
+      <div class="overlay" role="dialog" aria-modal="true" aria-label="Next move" ref={overlayRef} tabIndex={-1}>
         <button class="overlay-close" aria-label="Close" onClick={handleClose}>
           ✕
         </button>
@@ -163,9 +201,9 @@ export function NextMoveOverlay() {
   }
 
   return (
-    <div class="overlay">
+    <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-title" ref={overlayRef} tabIndex={-1}>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <span style="font-size:1.1rem;font-weight:700;">What's next?</span>
+        <span id="overlay-title" style="font-size:1.1rem;font-weight:700;">What's next?</span>
         <button class="overlay-close" style="position:static;" aria-label="Close" onClick={handleClose}>
           ✕
         </button>

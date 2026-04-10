@@ -50,7 +50,8 @@ export function EntityCard({ entity, parkKey }: Props) {
 
   return (
     <div class="ecard">
-      <div class={`sbar ${sbc(entity.status)}`} />
+      <div class={`sbar ${sbc(entity.status)}`} aria-hidden="true" />
+      <span class="sr-only">{entity.status === "OPERATING" ? "Open" : entity.status === "CLOSED" ? "Closed" : entity.status === "DOWN" ? "Temporarily down" : "Refurbishment"}</span>
       <div class="ecard-in">
         <div class="einfo">
           <div class="ename">{entity.name}</div>
@@ -100,7 +101,7 @@ export function EntityCard({ entity, parkKey }: Props) {
             <StatusBadge status={entity.status} />
           )}
           {!isInPlan && entity.status === "OPERATING" && (
-            <button class="add-plan-btn" onClick={handleAddToPlan} title="Add to plan">+</button>
+            <button class="add-plan-btn" onClick={handleAddToPlan} aria-label="Add to plan">+</button>
           )}
         </div>
       </div>

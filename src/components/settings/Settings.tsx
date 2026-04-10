@@ -19,9 +19,9 @@ export function Settings() {
     <div class="panel active">
       <h2 style="font-size:1.2rem;margin-bottom:1rem;">Settings</h2>
 
-      <div class="settings-section">
-        <div class="settings-label">Default park</div>
-        <select class="settings-select" value={parkMode.value}
+      <fieldset class="settings-section">
+        <legend class="settings-label">Default park</legend>
+        <select id="park-select" class="settings-select" value={parkMode.value}
           onChange={(e) => handleParkModeChange((e.target as HTMLSelectElement).value)}>
           <option value="auto">Auto (GPS)</option>
           {PARK_KEYS.map((k) => <option key={k} value={k}>{PARKS[k].name}</option>)}
@@ -36,44 +36,45 @@ export function Settings() {
             GPS denied — pick a park manually
           </div>
         )}
-      </div>
+      </fieldset>
 
-      <div class="settings-section">
-        <div class="settings-label">
+      <fieldset class="settings-section">
+        <legend class="settings-label">
           Current land
           {gpsAvailable.value && <span style="color:var(--low);font-size:0.72rem;"> (GPS active)</span>}
-        </div>
+        </legend>
         <LandPicker />
-      </div>
+      </fieldset>
 
       <div class="settings-section">
-        <div class="settings-label">Max wait: {maxWaitThreshold.value} min</div>
-        <input type="range" class="settings-range" min="15" max="180" step="5"
+        <label htmlFor="max-wait" class="settings-label">Max wait: {maxWaitThreshold.value} min</label>
+        <input id="max-wait" type="range" class="settings-range" min="15" max="180" step="5"
           value={maxWaitThreshold.value}
           onInput={(e) => { maxWaitThreshold.value = Number((e.target as HTMLInputElement).value); }} />
       </div>
 
       <div class="settings-section">
-        <div class="settings-label">Max crowd level: {maxPopularityThreshold.value}/10</div>
-        <input type="range" class="settings-range" min="1" max="10" step="1"
+        <label htmlFor="max-crowd" class="settings-label">Max crowd level: {maxPopularityThreshold.value}/10</label>
+        <input id="max-crowd" type="range" class="settings-range" min="1" max="10" step="1"
           value={maxPopularityThreshold.value}
           onInput={(e) => { maxPopularityThreshold.value = Number((e.target as HTMLInputElement).value); }} />
       </div>
 
-      <div class="settings-section">
-        <div class="settings-label">Theme</div>
-        <div class="theme-toggle">
+      <fieldset class="settings-section">
+        <legend class="settings-label">Theme</legend>
+        <div class="theme-toggle" role="group">
           {(["light", "dark", "auto"] as const).map((mode) => (
             <button
               key={mode}
               class={`theme-btn ${themeMode.value === mode ? "active" : ""}`}
+              aria-pressed={themeMode.value === mode}
               onClick={() => { themeMode.value = mode; }}
             >
               {mode === "light" ? "Light" : mode === "dark" ? "Dark" : "Auto"}
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       <div class="settings-section">
         <button class="settings-reset-btn"

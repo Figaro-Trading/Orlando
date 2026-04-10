@@ -41,7 +41,8 @@ function readCache<T>(cacheKey: string): CacheEntry<T> | null {
     const raw = localStorage.getItem(CACHE_PREFIX + cacheKey);
     if (!raw) return null;
     return JSON.parse(raw) as CacheEntry<T>;
-  } catch {
+  } catch (e) {
+    console.warn("[api] Cache read error:", e);
     return null;
   }
 }
@@ -52,8 +53,8 @@ function writeCache<T>(cacheKey: string, data: T): void {
       CACHE_PREFIX + cacheKey,
       JSON.stringify({ data, fetchedAt: Date.now() }),
     );
-  } catch {
-    /* QuotaExceeded — silently ignore */
+  } catch (e) {
+    console.warn("[api] Cache write error (likely QuotaExceeded):", e);
   }
 }
 

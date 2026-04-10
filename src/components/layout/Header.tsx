@@ -29,8 +29,8 @@ export function Header() {
         >
           {isLoading.value ? "Loading..." : "Refresh"}
         </button>
-        <span class="last-update">{lastUpdate}</span>
-        {isStale && <span class="stale-badge">Stale</span>}
+        <span class="last-update" aria-live="polite">{lastUpdate}</span>
+        {isStale && <span class="stale-badge" role="status">Stale</span>}
       </div>
     </header>
   );

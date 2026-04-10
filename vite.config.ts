@@ -17,7 +17,7 @@ export default defineConfig({
         theme_color: "#0f1117",
         background_color: "#0f1117",
         display: "standalone",
-        orientation: "portrait",
+        orientation: "any",
         scope: "/Orlando/",
         start_url: "/Orlando/",
         icons: [

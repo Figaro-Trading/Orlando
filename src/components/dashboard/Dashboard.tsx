@@ -70,14 +70,16 @@ export function Dashboard() {
         {PARKS[pk].name}
       </div>
 
-      <TripProgress totalEntries={entries.length} />
+      <div aria-live="polite">
+        <TripProgress totalEntries={entries.length} />
+      </div>
       <AlertBanner />
 
-      <div class="checklist">
+      <ul class="checklist" role="list">
         {entries.map((entry) => {
           const isDone = completedIds.value.has(entry.id);
           return (
-            <div key={entry.id} class={`checklist-row ${isDone ? "is-done" : ""}`}>
+            <li key={entry.id} class={`checklist-row ${isDone ? "is-done" : ""}`}>
               <div class="checklist-info">
                 <div class="checklist-name">
                   {entry.isMustSee && <span style="color:var(--mid);margin-right:4px;">★</span>}
@@ -103,10 +105,10 @@ export function Dashboard() {
               ) : (
                 <button class="done-btn" onClick={() => handleToggle(entry)}>Done!</button>
               )}
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <NextMoveButton />
     </div>

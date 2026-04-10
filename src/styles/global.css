@@ -10,7 +10,7 @@
   --card: #1a1d27;
   --border: #2a2d3a;
   --text: #e8e8ed;
-  --muted: #8b8d97;
+  --muted: #9a9ca6;
   --low: #34c759;
   --mid: #ff9f0a;
   --high: #ff453a;
@@ -32,6 +32,29 @@
   --purple: #7c3aed;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.sr-only:focus { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+
+/* Keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
@@ -50,7 +73,7 @@ header {
   border-bottom: 1px solid var(--border);
 }
 header h1 {
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--text);
   background: linear-gradient(135deg, var(--accent), var(--purple));
@@ -121,7 +144,7 @@ header h1 {
   display: block; width: 100%; padding: 1rem; margin-top: 1rem;
   background: linear-gradient(135deg, var(--accent), var(--purple));
   color: #fff; border: none; border-radius: 12px;
-  font-size: 1.1rem; font-weight: 700; cursor: pointer;
+  font-size: clamp(1rem, 3vw, 1.1rem); font-weight: 700; cursor: pointer;
   box-shadow: 0 4px 16px var(--accent-bg);
 }
 .alert-banner { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.75rem; }
@@ -142,7 +165,7 @@ header h1 {
 .checklist-row.is-done { opacity: 0.45; }
 .undo-btn {
   padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.72rem;
-  font-weight: 600; cursor: pointer; min-height: 32px; white-space: nowrap;
+  font-weight: 600; cursor: pointer; min-height: 44px; white-space: nowrap;
   background: rgba(255,159,10,0.15); color: var(--mid); border: 1px solid rgba(255,159,10,0.3);
 }
 .checklist-info { flex: 1; min-width: 0; }
@@ -159,6 +182,9 @@ header h1 {
 .checklist-dur { }
 
 /* Settings */
+fieldset.settings-section { border: none; padding: 0; }
+fieldset.settings-section legend.settings-label { float: left; width: 100%; }
+fieldset.settings-section legend.settings-label + * { clear: both; }
 .settings-section { margin-bottom: 1.2rem; }
 .settings-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
 .settings-select {
@@ -209,7 +235,7 @@ header h1 {
 }
 .plan-row-remove {
   background: none; border: none; color: var(--high); cursor: pointer;
-  font-size: 1rem; min-width: 32px; min-height: 32px;
+  font-size: 1rem; min-width: 44px; min-height: 44px;
   display: flex; align-items: center; justify-content: center;
   opacity: 0.6; transition: opacity 0.2s;
 }
@@ -304,7 +330,7 @@ header h1 {
 .t-up { color: var(--high); }
 .t-dn { color: var(--low); }
 .bsm { font-size: 0.7rem; padding: 0.18rem 0.4rem; border-radius: 4px; white-space: nowrap; }
-.b-ll { background: rgba(192,132,252,0.13); color: var(--purple); }
+.b-ll { background: rgba(192,132,252,0.18); color: var(--purple); }
 .b-ill { background: rgba(255,159,10,0.1); color: var(--mid); }
 .b-sr { background: var(--accent-bg); color: var(--accent); }
 .b-vq { background: rgba(255,214,10,0.1); color: #e8d46a; }
@@ -335,7 +361,7 @@ header h1 {
 /* Add to plan button */
 .add-plan-btn {
   padding: 0.3rem 0.5rem; border-radius: 6px; font-size: 0.85rem;
-  font-weight: 700; cursor: pointer; min-height: 32px; min-width: 32px;
+  font-weight: 700; cursor: pointer; min-height: 44px; min-width: 44px;
   background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent);
   display: flex; align-items: center; justify-content: center;
 }
@@ -343,7 +369,7 @@ header h1 {
 /* Done button */
 .done-btn {
   padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.72rem;
-  font-weight: 600; cursor: pointer; min-height: 32px;
+  font-weight: 600; cursor: pointer; min-height: 44px;
   background: rgba(52,199,89,0.15); color: var(--low); border: 1px solid rgba(52,199,89,0.3);
 }
 
@@ -401,15 +427,43 @@ header h1 {
   font-size: 0.72rem; font-weight: 700; color: var(--muted);
   text-transform: uppercase; letter-spacing: 0.5px;
 }
-.rec-entity-name { font-size: 1.1rem; font-weight: 700; margin-top: 0.3rem; }
+.rec-entity-name { font-size: clamp(1rem, 3vw, 1.1rem); font-weight: 700; margin-top: 0.3rem; }
 .rec-reason { font-size: 0.78rem; margin-top: 0.3rem; }
 .rec-chips { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.5rem; }
 
-/* Responsive */
-@media (max-width: 600px) {
-  header h1 { font-size: 1.2rem; }
+/* Responsive — Mobile */
+@media (max-width: 767px) {
   .ecard-in { padding: 0.45rem 0.6rem; }
   .ename { font-size: 0.82rem; }
   .stat { padding: 0.35rem 0.5rem; }
   .stat-val { font-size: 1rem; }
+}
+
+/* Responsive — Landscape phone */
+@media (orientation: landscape) and (max-height: 500px) {
+  header { padding: 0.75rem 1rem 0.5rem; }
+  header h1 { font-size: 1.2rem; }
+  main { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  .navbar { padding: 0.2rem 0 calc(0.2rem + env(safe-area-inset-bottom)); }
+  .nav-item { min-height: 40px; font-size: 0.6rem; }
+  .nav-item.next-btn { width: 44px; height: 44px; top: -8px; }
+}
+
+/* Responsive — Tablet */
+@media (min-width: 768px) {
+  .panel { padding: 1.5rem; }
+  .ename { font-size: 1rem; }
+  .ecard-in { padding: 0.75rem 1rem; }
+  .checklist-row { padding: 0.75rem 1rem; }
+  .rec-block { padding: 1.25rem; }
+  .park-banner { padding: 1.25rem; }
+  .land-hdr { font-size: 1.15rem; }
+}
+
+/* Responsive — Desktop */
+@media (min-width: 1024px) {
+  .panel { padding: 2rem; max-width: 1100px; }
+  header { padding: 2rem 1rem 1rem; }
+  .stat-val { font-size: 1.4rem; }
+  .fab-next { max-width: 600px; margin-left: auto; margin-right: auto; }
 }
