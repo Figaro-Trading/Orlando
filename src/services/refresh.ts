@@ -21,27 +21,19 @@ export async function loadAll(): Promise<void> {
   isLoading.value = true;
   lastError.value = null;
 
-  for (const parkKey of PARK_KEYS) {
-    const liveP = fetchLive(parkKey)
-      .then((r) => setLive(parkKey, r.data))
-      .catch((e) =>
-        console.warn(`[refresh] live ${parkKey}:`, (e as Error).message),
-      );
-    const schedP = fetchSchedule(parkKey)
-      .then((r) => setSchedule(parkKey, r.data))
-      .catch((e) =>
-        console.warn(`[refresh] sched ${parkKey}:`, (e as Error).message),
-      );
+  // Load active park first for instant usability
+  const active = activeParkKey.value;
+  const remaining = PARK_KEYS.filter((k) => k !== active);
 
-    await Promise.allSettled([liveP, schedP]);
+  await loadParkLiveAndSchedule(active);
 
-    if (parkKey !== PARK_KEYS[PARK_KEYS.length - 1]) {
-      await new Promise((r) => setTimeout(r, STAGGER_DELAY_MS));
-    }
+  for (const parkKey of remaining) {
+    await new Promise((r) => setTimeout(r, STAGGER_DELAY_MS));
+    await loadParkLiveAndSchedule(parkKey);
   }
 
-  // Fetch children for stale/missing parks
-  const parksNeedingLocations = PARK_KEYS.filter(
+  // Fetch children for stale/missing parks (active first)
+  const parksNeedingLocations = [active, ...remaining].filter(
     (k) => !locationTimestamps.value[k] || isStaleLocations.value[k],
   );
 
@@ -62,6 +54,21 @@ export async function loadAll(): Promise<void> {
     lastError.value =
       "Unable to load data. Check your connection.";
   }
+}
+
+async function loadParkLiveAndSchedule(parkKey: string): Promise<void> {
+  await Promise.allSettled([
+    fetchLive(parkKey)
+      .then((r) => setLive(parkKey, r.data))
+      .catch((e) =>
+        console.warn(`[refresh] live ${parkKey}:`, (e as Error).message),
+      ),
+    fetchSchedule(parkKey)
+      .then((r) => setSchedule(parkKey, r.data))
+      .catch((e) =>
+        console.warn(`[refresh] sched ${parkKey}:`, (e as Error).message),
+      ),
+  ]);
 }
 
 export async function refreshActivePark(): Promise<void> {
