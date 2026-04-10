@@ -94,26 +94,26 @@ export const LANDS: Record<ParkKey, LandsMap> = {
       "SeaBase Aquarium",
       "JAMMitors",
     ],
-    "World Showcase - Mexique": [
+    "World Showcase - Mexico": [
       "Gran Fiesta Tour Starring The Three Caballeros",
       "Meet Donald Duck in Mexico",
       "Mariachi Cobre",
     ],
-    "World Showcase - Norvege": [
+    "World Showcase - Norway": [
       "Frozen Ever After",
       "Meet Anna and Elsa at Royal Sommerhus",
     ],
-    "World Showcase - Chine": [
+    "World Showcase - China": [
       "Reflections of China",
       "Meet Mulan in China",
     ],
-    "World Showcase - Allemagne": ["Entertainment at Germany Gazebo"],
-    "World Showcase - Amerique": [
+    "World Showcase - Germany": ["Entertainment at Germany Gazebo"],
+    "World Showcase - America": [
       "The American Adventure",
       "Voices of Liberty",
       "American Heritage Gallery",
     ],
-    "World Showcase - Japon": ["Matsuriza"],
+    "World Showcase - Japan": ["Matsuriza"],
     "World Showcase - France": [
       "Impressions de France",
       "Beauty and the Beast Sing-Along",
@@ -124,7 +124,7 @@ export const LANDS: Record<ParkKey, LandsMap> = {
       "Canada Far and Wide in Circle-Vision 360",
       "Entertainment at Canada Mill Stage",
     ],
-    "World Showcase - Royaume-Uni": ["Rose & Crown Pub Musician"],
+    "World Showcase - United Kingdom": ["Rose & Crown Pub Musician"],
   },
   hs: {
     "Hollywood Boulevard": ["Mickey & Minnie's Runaway Railway"],

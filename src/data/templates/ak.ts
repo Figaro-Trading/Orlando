@@ -5,7 +5,7 @@ export const ak: DayTemplate = {
   "label": "Animal Kingdom",
   "park": "ak",
   "openingHours": "",
-  "coupefile": "Parcours : Pandora → Africa → Asia → Sortie 13h50",
+  "skipPass": "Route: Pandora → Africa → Asia → Exit 1:50 PM",
   "zones": [
     {
       "number": 1,
@@ -14,7 +14,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z1-000",
           "time": "08:00",
-          "name": "Départ hébergement (arriver avant ouverture!)",
+          "name": "Leave hotel (arrive before opening!)",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -32,7 +32,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z2-000",
           "time": "09:00",
-          "name": "OUVERTURE → Sprint Pandora!",
+          "name": "OPENING → Sprint Pandora!",
           "type": "logistics",
           "land": "Oasis",
           "isNew": false,
@@ -50,7 +50,7 @@ export const ak: DayTemplate = {
           "land": "Pandora",
           "duration": 5,
           "rideType": "simulator",
-          "coupefile": "LL SP",
+          "skipPass": "LL SP",
           "popularity": 10,
           "estimatedWait": 78,
           "rating": 4.9,
@@ -70,7 +70,7 @@ export const ak: DayTemplate = {
           "land": "Pandora",
           "duration": 5,
           "rideType": "boat ride",
-          "coupefile": "LL MP",
+          "skipPass": "LL MP",
           "popularity": 7.65,
           "estimatedWait": 52,
           "rating": 4.9,
@@ -91,7 +91,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z3-000",
           "time": "10:20",
-          "name": "Marche Pandora → Africa",
+          "name": "Walk Pandora → Africa",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -104,12 +104,12 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z3-001",
           "time": "10:25",
-          "name": "Kilimanjaro Safaris (animaux actifs!)",
+          "name": "Kilimanjaro Safaris (active animals!)",
           "type": "ride",
           "land": "Africa",
           "duration": 22,
           "rideType": "safari",
-          "coupefile": "LL MP",
+          "skipPass": "LL MP",
           "popularity": 6.55,
           "estimatedWait": 41,
           "rating": 4.9,
@@ -144,7 +144,7 @@ export const ak: DayTemplate = {
           "land": "Africa",
           "duration": 30,
           "rideType": "show",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 4.09,
           "estimatedWait": 19,
           "rating": 4.38,
@@ -165,7 +165,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z4-000",
           "time": "11:45",
-          "name": "Marche Africa → Asia",
+          "name": "Walk Africa → Asia",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -183,7 +183,7 @@ export const ak: DayTemplate = {
           "land": "Asia",
           "duration": 3,
           "rideType": "coaster",
-          "coupefile": "LL MP",
+          "skipPass": "LL MP",
           "popularity": 5.66,
           "estimatedWait": 33,
           "rating": 4.72,
@@ -198,7 +198,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z4-002",
           "time": "12:05",
-          "name": "Maharajah Jungle Trek (trail Asia, tigres!)",
+          "name": "Maharajah Jungle Trek (trail Asia, tigers!)",
           "type": "explore",
           "land": "Asia",
           "duration": 15,
@@ -213,12 +213,12 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z4-003",
           "time": "12:25",
-          "name": "Kali River Rapids⚠ on se mouille!",
+          "name": "Kali River Rapids⚠ you will get wet!",
           "type": "ride",
           "land": "Asia",
           "duration": 5,
           "rideType": "rapids",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 4.99,
           "estimatedWait": 27,
           "rating": 4.58,
@@ -234,12 +234,12 @@ export const ak: DayTemplate = {
     },
     {
       "number": 5,
-      "label": "DISCOVERY ISLAND (sortie)",
+      "label": "DISCOVERY ISLAND (exit)",
       "entries": [
         {
           "id": "ak-z5-000",
           "time": "12:55",
-          "name": "Marche Asia → Discovery Island",
+          "name": "Walk Asia → Discovery Island",
           "type": "walk",
           "land": "Discovery Isl.",
           "duration": 5,
@@ -254,7 +254,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z5-001",
           "time": "13:00",
-          "name": "Zootopia: Better Zoogether! (nouveau show 3D!)",
+          "name": "Zootopia: Better Zoogether! (new 3D show!)",
           "type": "experience",
           "land": "Discovery Isl.",
           "duration": 20,
@@ -269,7 +269,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z5-002",
           "time": "13:25",
-          "name": "Déjeuner Flame Tree BBQ",
+          "name": "Lunch Flame Tree BBQ",
           "type": "meal",
           "land": "Discovery Isl.",
           "duration": 20,
@@ -283,7 +283,7 @@ export const ak: DayTemplate = {
         {
           "id": "ak-z5-003",
           "time": "13:50",
-          "name": "Sortie AK",
+          "name": "Exit AK",
           "type": "logistics",
           "duration": 25,
           "isNew": false,
@@ -297,6 +297,6 @@ export const ak: DayTemplate = {
     }
   ],
   "alerts": [
-    "⚠️ Achats 20/04 à 7h00 : SP Flight of Passage | MP réservé 17/04 : Na'vi + Kilimanjaro + Everest"
+    "⚠️ Purchases 04/20 at 7:00 AM: SP Flight of Passage | MP reserved 04/17: Na'vi + Kilimanjaro + Everest"
   ]
 };

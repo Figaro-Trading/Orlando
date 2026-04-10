@@ -23,7 +23,7 @@ export type PlanEntry = {
   duration?: number;
 
   rideType?: string;
-  coupefile?: string;
+  skipPass?: string;
   popularity?: number;
   estimatedWait?: number;
   rating?: number;
@@ -58,7 +58,7 @@ export type DayTemplate = {
   parkAlt?: string;
   transitionTime?: string;
   openingHours: string;
-  coupefile: string;
+  skipPass: string;
   zones: TemplateZone[];
   alerts: string[];
 };
@@ -142,7 +142,7 @@ export type RecommendedItem = {
   status: "recommended" | "possible" | "not_recommended";
   isOnPlan: boolean;
   priority?: 1 | 2 | 3;
-  coupefile?: string;
+  skipPass?: string;
 };
 
 export type ReasoningSummary = {

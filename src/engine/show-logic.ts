@@ -120,6 +120,6 @@ export function evaluateShows(
         : "possible",
     isOnPlan: best.planEntry !== null,
     priority: best.planEntry?.priority,
-    coupefile: best.planEntry?.coupefile,
+    skipPass: best.planEntry?.skipPass,
   };
 }

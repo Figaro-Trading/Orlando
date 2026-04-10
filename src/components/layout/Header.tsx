@@ -10,7 +10,7 @@ export function Header() {
 
   const ts = liveTimestamps.value[pk];
   const lastUpdate = ts
-    ? `MAJ ${new Date(ts).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`
+    ? `Updated ${new Date(ts).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`
     : "";
 
   const isStale = isStaleLive.value[pk] ?? false;
@@ -27,10 +27,10 @@ export function Header() {
           onClick={() => refreshActivePark()}
           disabled={isLoading.value}
         >
-          {isLoading.value ? "Chargement..." : "Actualiser"}
+          {isLoading.value ? "Loading..." : "Refresh"}
         </button>
         <span class="last-update">{lastUpdate}</span>
-        {isStale && <span class="stale-badge">Données anciennes</span>}
+        {isStale && <span class="stale-badge">Stale</span>}
       </div>
     </header>
   );

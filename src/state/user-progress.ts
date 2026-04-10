@@ -29,7 +29,7 @@ export const todayCompletions = computed(() =>
 
 export const dayProgress = computed(() => {
   const count = todayCompletions.value.length;
-  return `${count} activité(s) faites`;
+  return `${count} activities done`;
 });
 
 export function markCompleted(event: CompletionEvent): void {

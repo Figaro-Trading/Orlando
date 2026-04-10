@@ -25,13 +25,13 @@ export function FeasibilityChip({ feasibility }: FeasibilityChipProps) {
 
       {feasibility.arrivalSlackMinutes != null && (
         <span class={`bsm ${slackClass}`}>
-          {feasibility.arrivalSlackMinutes >= 5 ? "✓" : "⚠"} Marge{" "}
+          {feasibility.arrivalSlackMinutes >= 5 ? "✓" : "⚠"} Buffer{" "}
           {feasibility.arrivalSlackMinutes} min
         </span>
       )}
 
       {feasibility.latestDepartureTime && (
-        <span class="bsm b-show">Partir avant {feasibility.latestDepartureTime}</span>
+        <span class="bsm b-show">Leave by {feasibility.latestDepartureTime}</span>
       )}
     </div>
   );

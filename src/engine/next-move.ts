@@ -118,7 +118,7 @@ export function computeNextMove(input: NextMoveInput): NextMoveResult {
       status,
       isOnPlan: true,
       priority: nextEntry.priority,
-      coupefile: nextEntry.coupefile,
+      skipPass: nextEntry.skipPass,
     };
   }
 
@@ -178,7 +178,7 @@ export function computeNextMove(input: NextMoveInput): NextMoveResult {
       status: score <= 40 ? "recommended" : "possible",
       isOnPlan: planEntry !== null,
       priority: planEntry?.priority,
-      coupefile: planEntry?.coupefile,
+      skipPass: planEntry?.skipPass,
     });
   }
 
@@ -320,11 +320,11 @@ export function computeNextMove(input: NextMoveInput): NextMoveResult {
     currentPark: plan.activePark,
     currentLand: plan.currentZoneLabel ?? input.manualLand ?? undefined,
     currentZone: plan.currentZone ?? undefined,
-    currentTime: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }),
+    currentTime: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
     gpsPosition: input.userLat != null && input.userLon != null ? { lat: input.userLat, lon: input.userLon } : undefined,
     skippedPlannedItemIds,
     blockingFactors,
-    dayProgress: `${plan.completedEntries}/${plan.totalEntries} activités faites`,
+    dayProgress: `${plan.completedEntries}/${plan.totalEntries} activities done`,
   };
 
   return { plannedNext, bestOverallChoice, nearbyOptions, showSuggestion, reasoning };

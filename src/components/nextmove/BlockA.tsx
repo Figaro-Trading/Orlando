@@ -1,6 +1,6 @@
 import { ReasonBadge } from "./ReasonBadge";
 import { FeasibilityChip } from "./FeasibilityChip";
-import { CoupefileChip } from "../shared/CoupefileChip";
+import { SkipPassChip } from "../shared/SkipPassChip";
 import { WaitBadge } from "../shared/WaitBadge";
 import type { RecommendedItem } from "../../types";
 
@@ -13,7 +13,7 @@ export function BlockA({ item }: BlockAProps) {
 
   return (
     <div class="rec-block">
-      <div class="rec-block-label">Prochaine prévue</div>
+      <div class="rec-block-label">Up next</div>
       <div
         class="rec-entity-name"
         style={isExcluded ? "opacity:0.5;text-decoration:line-through;" : ""}
@@ -24,10 +24,10 @@ export function BlockA({ item }: BlockAProps) {
       <div class="rec-chips">
         <FeasibilityChip feasibility={item.feasibility} />
         {item.waitTime != null && <WaitBadge waitTime={item.waitTime} />}
-        {item.coupefile && item.coupefile !== "—" && (
-          <CoupefileChip label={item.coupefile} />
+        {item.skipPass && item.skipPass !== "—" && (
+          <SkipPassChip label={item.skipPass} />
         )}
-        {item.priority === 1 && <span class="bsm b-ll">Priorité haute</span>}
+        {item.priority === 1 && <span class="bsm b-ll">Must-do</span>}
       </div>
     </div>
   );

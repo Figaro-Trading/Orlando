@@ -70,7 +70,7 @@ export function EntityCard({ entity, parkKey }: Props) {
             {planEntry?.rating && (
               <span class="etype">· ★{planEntry.rating.toFixed(1)}</span>
             )}
-            <span class="eupd">· Maj {ft(entity.lastUpdated)}</span>
+            <span class="eupd">· Upd {ft(entity.lastUpdated)}</span>
           </div>
         </div>
         <div class="emeta">
@@ -100,7 +100,7 @@ export function EntityCard({ entity, parkKey }: Props) {
             <StatusBadge status={entity.status} />
           )}
           {!isInPlan && entity.status === "OPERATING" && (
-            <button class="add-plan-btn" onClick={handleAddToPlan} title="Ajouter au planning">+</button>
+            <button class="add-plan-btn" onClick={handleAddToPlan} title="Add to plan">+</button>
           )}
         </div>
       </div>

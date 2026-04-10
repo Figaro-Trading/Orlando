@@ -15,7 +15,7 @@ export function ParkView() {
   if (!data) {
     return (
       <div class="panel active">
-        <div class="loading"><div class="spinner" /><div>Chargement des données...</div></div>
+        <div class="loading"><div class="spinner" /><div>Loading...</div></div>
       </div>
     );
   }
@@ -48,7 +48,7 @@ export function ParkView() {
           <LandSection key={name} landName={name} entities={groups[name]} parkKey={pk} />
         ) : null,
       )}
-      {other.length > 0 && <LandSection landName="Autres" entities={other} parkKey={pk} />}
+      {other.length > 0 && <LandSection landName="Other" entities={other} parkKey={pk} />}
     </div>
   );
 }

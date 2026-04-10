@@ -9,12 +9,12 @@ import { NextMoveButton } from "./NextMoveButton";
 import type { PlanEntry, ParkKey } from "../../types";
 
 const TYPE_LABELS: Record<string, string> = {
-  ride: "Attraction",
-  show: "Spectacle",
-  meal: "Repas",
-  meet: "Rencontre",
-  experience: "Expérience",
-  explore: "Exploration",
+  ride: "Ride",
+  show: "Show",
+  meal: "Dining",
+  meet: "Character Meet",
+  experience: "Experience",
+  explore: "Explore",
 };
 
 const TYPE_COLORS: Record<string, string> = {
@@ -38,7 +38,7 @@ export function Dashboard() {
     return (
       <div class="panel active">
         <div style="padding: 2rem; text-align: center; color: var(--muted);">
-          Aucun planning disponible
+          No plan available
         </div>
       </div>
     );
@@ -99,9 +99,9 @@ export function Dashboard() {
                 </div>
               </div>
               {isDone ? (
-                <button class="undo-btn" onClick={() => handleToggle(entry)}>Annuler</button>
+                <button class="undo-btn" onClick={() => handleToggle(entry)}>Undo</button>
               ) : (
-                <button class="done-btn" onClick={() => handleToggle(entry)}>Fait !</button>
+                <button class="done-btn" onClick={() => handleToggle(entry)}>Done!</button>
               )}
             </div>
           );

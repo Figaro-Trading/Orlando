@@ -1,6 +1,6 @@
 import { ReasonBadge } from "./ReasonBadge";
 import { FeasibilityChip } from "./FeasibilityChip";
-import { CoupefileChip } from "../shared/CoupefileChip";
+import { SkipPassChip } from "../shared/SkipPassChip";
 import { WaitBadge } from "../shared/WaitBadge";
 import type { RecommendedItem } from "../../types";
 
@@ -12,7 +12,7 @@ export function BlockC({ items }: BlockCProps) {
   return (
     <div>
       <div class="rec-block-label" style="padding:0.5rem 0;">
-        Alternatives proches
+        Nearby options
       </div>
       {items.map((item) => (
         <div
@@ -36,8 +36,8 @@ export function BlockC({ items }: BlockCProps) {
           <ReasonBadge reason={item.reason} status={item.status} />
           <div class="rec-chips">
             <FeasibilityChip feasibility={item.feasibility} />
-            {item.coupefile && item.coupefile !== "—" && (
-              <CoupefileChip label={item.coupefile} />
+            {item.skipPass && item.skipPass !== "—" && (
+              <SkipPassChip label={item.skipPass} />
             )}
           </div>
         </div>

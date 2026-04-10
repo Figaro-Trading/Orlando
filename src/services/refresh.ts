@@ -60,7 +60,7 @@ export async function loadAll(): Promise<void> {
   const hasAnyLive = Object.values(liveData.value).some((v) => v !== null);
   if (!hasAnyLive) {
     lastError.value =
-      "Impossible de charger les données. Vérifiez votre connexion.";
+      "Unable to load data. Check your connection.";
   }
 }
 

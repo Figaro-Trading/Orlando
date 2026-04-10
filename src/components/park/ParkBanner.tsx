@@ -34,7 +34,7 @@ export function ParkBanner({ parkKey }: Props) {
     <div class="park-banner">
       <div class="park-banner-top">
         <span class={`status-pill ${isOpen ? "open" : "closed"}`}>
-          {isOpen ? "Ouvert" : "Fermé"}
+          {isOpen ? "Open" : "Closed"}
         </span>
         <span style="font-weight:700;font-size:1.1rem;">{PARKS[parkKey].name}</span>
       </div>
@@ -48,12 +48,12 @@ export function ParkBanner({ parkKey }: Props) {
       <div class="park-stats">
         <div class="stat">
           <div class="stat-val">{opCount}/{attractions.length}</div>
-          <div class="stat-lbl">Ouvertes</div>
+          <div class="stat-lbl">Open</div>
         </div>
         {avg > 0 && (
           <div class="stat">
             <div class="stat-val" style={`color:${avgColor}`}>{avg} min</div>
-            <div class="stat-lbl">Moy.</div>
+            <div class="stat-lbl">Avg.</div>
           </div>
         )}
         {maxWait > 0 && (

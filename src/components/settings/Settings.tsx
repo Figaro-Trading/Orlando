@@ -17,10 +17,10 @@ export function Settings() {
 
   return (
     <div class="panel active">
-      <h2 style="font-size:1.2rem;margin-bottom:1rem;">Réglages</h2>
+      <h2 style="font-size:1.2rem;margin-bottom:1rem;">Settings</h2>
 
       <div class="settings-section">
-        <div class="settings-label">Parc par défaut</div>
+        <div class="settings-label">Default park</div>
         <select class="settings-select" value={parkMode.value}
           onChange={(e) => handleParkModeChange((e.target as HTMLSelectElement).value)}>
           <option value="auto">Auto (GPS)</option>
@@ -28,40 +28,40 @@ export function Settings() {
         </select>
         {parkMode.value === "auto" && gpsAvailable.value && (
           <div style="font-size:0.72rem;color:var(--low);margin-top:0.3rem;">
-            Parc détecté : {PARKS[activeParkKey.value].name}
+            Detected: {PARKS[activeParkKey.value].name}
           </div>
         )}
         {parkMode.value === "auto" && gpsPermissionState.value === "denied" && (
           <div style="font-size:0.72rem;color:var(--high);margin-top:0.3rem;">
-            GPS refusé — sélectionnez un parc manuellement
+            GPS denied — pick a park manually
           </div>
         )}
       </div>
 
       <div class="settings-section">
         <div class="settings-label">
-          Land actuel
-          {gpsAvailable.value && <span style="color:var(--low);font-size:0.72rem;"> (GPS actif)</span>}
+          Current land
+          {gpsAvailable.value && <span style="color:var(--low);font-size:0.72rem;"> (GPS active)</span>}
         </div>
         <LandPicker />
       </div>
 
       <div class="settings-section">
-        <div class="settings-label">Seuil attente max : {maxWaitThreshold.value} min</div>
+        <div class="settings-label">Max wait: {maxWaitThreshold.value} min</div>
         <input type="range" class="settings-range" min="15" max="180" step="5"
           value={maxWaitThreshold.value}
           onInput={(e) => { maxWaitThreshold.value = Number((e.target as HTMLInputElement).value); }} />
       </div>
 
       <div class="settings-section">
-        <div class="settings-label">Seuil popularité max : {maxPopularityThreshold.value}/10</div>
+        <div class="settings-label">Max crowd level: {maxPopularityThreshold.value}/10</div>
         <input type="range" class="settings-range" min="1" max="10" step="1"
           value={maxPopularityThreshold.value}
           onInput={(e) => { maxPopularityThreshold.value = Number((e.target as HTMLInputElement).value); }} />
       </div>
 
       <div class="settings-section">
-        <div class="settings-label">Thème</div>
+        <div class="settings-label">Theme</div>
         <div class="theme-toggle">
           {(["light", "dark", "auto"] as const).map((mode) => (
             <button
@@ -69,7 +69,7 @@ export function Settings() {
               class={`theme-btn ${themeMode.value === mode ? "active" : ""}`}
               onClick={() => { themeMode.value = mode; }}
             >
-              {mode === "light" ? "Jour" : mode === "dark" ? "Nuit" : "Auto"}
+              {mode === "light" ? "Light" : mode === "dark" ? "Dark" : "Auto"}
             </button>
           ))}
         </div>
@@ -77,8 +77,8 @@ export function Settings() {
 
       <div class="settings-section">
         <button class="settings-reset-btn"
-          onClick={() => { if (confirm("Réinitialiser toute la progression ?")) resetProgress(); }}>
-          Réinitialiser la progression
+          onClick={() => { if (confirm("Reset all progress?")) resetProgress(); }}>
+          Reset progress
         </button>
       </div>
     </div>

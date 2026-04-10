@@ -2,7 +2,7 @@ import { TZ } from "../data/config";
 
 export function ft(iso: string | null | undefined): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleTimeString("fr-FR", {
+  return new Date(iso).toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
     timeZone: TZ,
@@ -29,7 +29,7 @@ export function todayOrlando(): string {
 export function relTime(iso: string | null | undefined): string {
   if (!iso) return "";
   const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
-  if (m < 1) return "maintenant";
+  if (m < 1) return "now";
   if (m < 60) return `${m}min`;
   return `${Math.floor(m / 60)}h`;
 }

@@ -55,7 +55,7 @@ export function PlanningView() {
   };
 
   const handleReset = () => {
-    if (confirm("Réinitialiser le planning au modèle par défaut ?")) {
+    if (confirm("Reset plan to default template?")) {
       resetParkPlan(pk);
     }
   };
@@ -76,7 +76,7 @@ export function PlanningView() {
       </div>
 
       <div style="font-size:1rem;font-weight:700;margin:0.75rem 0 0.5rem;">
-        {PARKS[pk].name} — {plan.length} activités
+        {PARKS[pk].name} — {plan.length} activities
       </div>
 
       {/* Planning rows */}
@@ -92,7 +92,7 @@ export function PlanningView() {
               {entry.name ? (
                 <option value={entry.name}>{entry.name}</option>
               ) : (
-                <option value={EMPTY_VALUE}>— Choisir —</option>
+                <option value={EMPTY_VALUE}>— Choose —</option>
               )}
               {Object.entries(lands).map(([landName, activities]) => (
                 <optgroup key={landName} label={landName}>
@@ -112,10 +112,10 @@ export function PlanningView() {
       {/* Action buttons */}
       <div class="plan-actions">
         <button class="plan-add-btn" onClick={handleAdd}>
-          + Ajouter une activité
+          + Add activity
         </button>
         <button class="plan-reset-btn" onClick={handleReset}>
-          Réinitialiser
+          Reset
         </button>
       </div>
     </div>

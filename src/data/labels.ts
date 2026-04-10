@@ -1,14 +1,14 @@
 export const TYPE_LBL: Record<string, string> = {
-  ATTRACTION: "Attraction",
-  SHOW: "Spectacle",
+  ATTRACTION: "Ride",
+  SHOW: "Show",
   RESTAURANT: "Restaurant",
 };
 
 export const STATUS_LBL: Record<string, string> = {
-  OPERATING: "En service",
-  CLOSED: "Fermé",
-  DOWN: "En panne",
-  REFURBISHMENT: "Réhabilitation",
+  OPERATING: "Operating",
+  CLOSED: "Closed",
+  DOWN: "Down",
+  REFURBISHMENT: "Rehab",
 };
 
-export const JOURS: string[] = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
+export const DAYS: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

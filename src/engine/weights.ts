@@ -10,7 +10,7 @@ export const SCORE_WEIGHTS = {
   priorityBonus: { 1: 25, 2: 15, 3: 5 } as Record<1 | 2 | 3, number>,
   showUrgencyBonus: 10,
   rerideDiscount: -5,
-  coupefileBonus: {
+  skipPassBonus: {
     "LL SP": 15,
     "LL T1": 10,
     "LL T2": 8,

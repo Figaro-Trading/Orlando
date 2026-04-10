@@ -5,7 +5,7 @@ export const usf: DayTemplate = {
   "label": "Universal Studios",
   "park": "usf",
   "openingHours": "",
-  "coupefile": "Express ~$150/pers",
+  "skipPass": "Express ~$150/pers",
   "zones": [
     {
       "number": 1,
@@ -14,7 +14,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z1-000",
           "time": "15:40",
-          "name": "Arrivée King's Cross → Diagon Alley",
+          "name": "Arrive King's Cross → Diagon Alley",
           "type": "logistics",
           "land": "Diagon Alley",
           "isNew": false,
@@ -32,7 +32,7 @@ export const usf: DayTemplate = {
           "land": "Diagon Alley",
           "duration": 5,
           "rideType": "dark ride",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 6.62,
           "estimatedWait": 42,
           "rating": 4.85,
@@ -47,7 +47,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z1-002",
           "time": "16:15",
-          "name": "Exploration Diagon Alley (détails!)",
+          "name": "Explore Diagon Alley (details!)",
           "type": "explore",
           "land": "Diagon Alley",
           "duration": 30,
@@ -67,7 +67,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z2-000",
           "time": "16:50",
-          "name": "Marche Diagon → New York",
+          "name": "Walk Diagon → New York",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -85,7 +85,7 @@ export const usf: DayTemplate = {
           "land": "New York",
           "duration": 3,
           "rideType": "coaster",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 5.98,
           "estimatedWait": 36,
           "rating": 4.76,
@@ -105,7 +105,7 @@ export const usf: DayTemplate = {
           "land": "Production Central",
           "duration": 5,
           "rideType": "dark ride",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 5.39,
           "estimatedWait": 31,
           "rating": 4.59,
@@ -125,7 +125,7 @@ export const usf: DayTemplate = {
           "land": "Production Central",
           "duration": 5,
           "rideType": "simulator",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 6.17,
           "estimatedWait": 38,
           "rating": 4.75,
@@ -145,7 +145,7 @@ export const usf: DayTemplate = {
           "land": "Production Central",
           "duration": 5,
           "rideType": "interactive",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 4.47,
           "estimatedWait": 22,
           "rating": 4.55,
@@ -160,7 +160,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z2-005",
           "time": "18:40",
-          "name": "Goûter Voodoo Doughnut",
+          "name": "Snack Voodoo Doughnut",
           "type": "meal",
           "land": "CityWalk",
           "duration": 20,
@@ -175,12 +175,12 @@ export const usf: DayTemplate = {
     },
     {
       "number": 3,
-      "label": "DIAGON ALLEY (dîner + position)",
+      "label": "DIAGON ALLEY (dinner + positioning)",
       "entries": [
         {
           "id": "usf-z3-000",
           "time": "19:05",
-          "name": "Marche Production → Diagon Alley",
+          "name": "Walk Production → Diagon Alley",
           "type": "walk",
           "duration": 8,
           "isNew": false,
@@ -193,7 +193,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z3-001",
           "time": "19:15",
-          "name": "Dîner Leaky Cauldron",
+          "name": "Dinner Leaky Cauldron",
           "type": "meal",
           "land": "Diagon Alley",
           "duration": 45,
@@ -207,7 +207,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z3-002",
           "time": "20:05",
-          "name": "Placement CineSational (Central Park)",
+          "name": "Seating CineSational (Central Park)",
           "type": "experience",
           "land": "Central Park",
           "duration": 50,
@@ -222,7 +222,7 @@ export const usf: DayTemplate = {
     },
     {
       "number": 4,
-      "label": "SHOWS NOCTURNES (timing serré!)",
+      "label": "NIGHT SHOWS (tight timing!)",
       "entries": [
         {
           "id": "usf-z4-000",
@@ -244,7 +244,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z4-001",
           "time": "21:25",
-          "name": "Course rapide → King's Cross",
+          "name": "Quick dash → King's Cross",
           "type": "logistics",
           "land": "London",
           "duration": 8,
@@ -258,7 +258,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z4-002",
           "time": "21:35",
-          "name": "Hogwarts Express → IoA (dernier!)",
+          "name": "Hogwarts Express → IoA (last one!)",
           "type": "transport",
           "land": "King's Cross",
           "duration": 8,
@@ -287,7 +287,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z4-004",
           "time": "22:10",
-          "name": "Sortie IoA",
+          "name": "Exit IoA",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -299,7 +299,7 @@ export const usf: DayTemplate = {
         {
           "id": "usf-z4-005",
           "time": "22:45",
-          "name": "Retour hébergement",
+          "name": "Return to hotel",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -312,6 +312,6 @@ export const usf: DayTemplate = {
     }
   ],
   "alerts": [
-    "⚠️ FIN SHOW → SPRINT King's Cross!"
+    "⚠️ SHOW END → SPRINT King's Cross!"
   ]
 };

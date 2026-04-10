@@ -5,16 +5,16 @@ export const hs: DayTemplate = {
   "label": "Hollywood Studios",
   "park": "hs",
   "openingHours": "9h-21h30",
-  "coupefile": "LL Multi Pass + Single Pass",
+  "skipPass": "LL Multi Pass + Single Pass",
   "zones": [
     {
       "number": 1,
-      "label": "ENTRÉE (Hollywood Blvd + Echo Lake)",
+      "label": "ENTRANCE (Hollywood Blvd + Echo Lake)",
       "entries": [
         {
           "id": "hs-z1-000",
           "time": "10:15",
-          "name": "Entrée HS",
+          "name": "Enter HS",
           "type": "logistics",
           "land": "Hollywood Blvd",
           "isNew": false,
@@ -32,7 +32,7 @@ export const hs: DayTemplate = {
           "land": "Hollywood Blvd",
           "duration": 5,
           "rideType": "trackless",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 6.85,
           "estimatedWait": 44,
           "rating": 4.9,
@@ -52,7 +52,7 @@ export const hs: DayTemplate = {
           "land": "Echo Lake",
           "duration": 5,
           "rideType": "simulator",
-          "coupefile": "LL T2",
+          "skipPass": "LL T2",
           "popularity": 4.88,
           "estimatedWait": 26,
           "rating": 4.55,
@@ -72,7 +72,7 @@ export const hs: DayTemplate = {
           "land": "Echo Lake",
           "duration": 35,
           "rideType": "show",
-          "coupefile": "LL T2",
+          "skipPass": "LL T2",
           "popularity": 3.87,
           "estimatedWait": 17,
           "rating": 4.33,
@@ -93,7 +93,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z2-000",
           "time": "12:05",
-          "name": "Marche Echo Lake → Sunset Blvd",
+          "name": "Walk Echo Lake → Sunset Blvd",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -111,7 +111,7 @@ export const hs: DayTemplate = {
           "land": "Sunset Blvd",
           "duration": 5,
           "rideType": "drop tower",
-          "coupefile": "LL T2",
+          "skipPass": "LL T2",
           "popularity": 7.25,
           "estimatedWait": 48,
           "rating": 4.9,
@@ -126,7 +126,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z2-002",
           "time": "12:35",
-          "name": "Déjeuner Backlot Express",
+          "name": "Lunch Backlot Express",
           "type": "meal",
           "land": "Sunset Blvd",
           "duration": 45,
@@ -146,7 +146,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z3-000",
           "time": "13:25",
-          "name": "Marche Sunset → Toy Story Land",
+          "name": "Walk Sunset → Toy Story Land",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -164,7 +164,7 @@ export const hs: DayTemplate = {
           "land": "Toy Story Land",
           "duration": 2,
           "rideType": "coaster",
-          "coupefile": "LL T1",
+          "skipPass": "LL T1",
           "popularity": 8.95,
           "estimatedWait": 65,
           "rating": 4.9,
@@ -184,7 +184,7 @@ export const hs: DayTemplate = {
           "land": "Toy Story Land",
           "duration": 2,
           "rideType": "spinner",
-          "coupefile": "LL T2",
+          "skipPass": "LL T2",
           "popularity": 4.31,
           "estimatedWait": 21,
           "rating": 4.42,
@@ -204,7 +204,7 @@ export const hs: DayTemplate = {
           "land": "Toy Story Land",
           "duration": 6,
           "rideType": "interactive",
-          "coupefile": "LL T2",
+          "skipPass": "LL T2",
           "popularity": 6.34,
           "estimatedWait": 39,
           "rating": 4.88,
@@ -219,7 +219,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z3-004",
           "time": "14:35",
-          "name": "Goûter Woody's Lunch Box",
+          "name": "Snack Woody's Lunch Box",
           "type": "meal",
           "land": "Toy Story Land",
           "duration": 30,
@@ -239,7 +239,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z4-000",
           "time": "15:10",
-          "name": "Marche Toy Story → Galaxy's Edge",
+          "name": "Walk Toy Story → Galaxy's Edge",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -252,7 +252,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z4-001",
           "time": "15:15",
-          "name": "Exploration Batuu (ambiance)",
+          "name": "Explore Batuu (atmosphere)",
           "type": "explore",
           "land": "Galaxy's Edge",
           "duration": 20,
@@ -271,7 +271,7 @@ export const hs: DayTemplate = {
           "land": "Galaxy's Edge",
           "duration": 5,
           "rideType": "simulator",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 7.85,
           "estimatedWait": 54,
           "rating": 4.9,
@@ -291,7 +291,7 @@ export const hs: DayTemplate = {
           "land": "Galaxy's Edge",
           "duration": 18,
           "rideType": "trackless",
-          "coupefile": "LL SP",
+          "skipPass": "LL SP",
           "popularity": 10,
           "estimatedWait": 85,
           "rating": 4.9,
@@ -306,7 +306,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z4-004",
           "time": "17:05",
-          "name": "Exploration Galaxy's Edge (shops)",
+          "name": "Explore Galaxy's Edge (shops)",
           "type": "explore",
           "land": "Galaxy's Edge",
           "duration": 25,
@@ -320,7 +320,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z4-005",
           "time": "17:35",
-          "name": "Dîner Docking Bay 7",
+          "name": "Dinner Docking Bay 7",
           "type": "meal",
           "land": "Galaxy's Edge",
           "duration": 45,
@@ -340,7 +340,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z5-000",
           "time": "18:25",
-          "name": "Marche Galaxy's Edge → Sunset Blvd",
+          "name": "Walk Galaxy's Edge → Sunset Blvd",
           "type": "walk",
           "duration": 10,
           "isNew": false,
@@ -358,7 +358,7 @@ export const hs: DayTemplate = {
           "land": "Sunset Blvd",
           "duration": 5,
           "rideType": "drop tower",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 7.25,
           "estimatedWait": 48,
           "rating": 4.9,
@@ -373,9 +373,9 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z5-002",
           "time": "19:05",
-          "name": "Placement Fantasmic!",
+          "name": "Seating Fantasmic!",
           "type": "experience",
-          "land": "Amphithéâtre",
+          "land": "Amphitheater",
           "duration": 90,
           "isNew": false,
           "isReride": false,
@@ -389,7 +389,7 @@ export const hs: DayTemplate = {
           "time": "20:30",
           "name": "FANTASMIC!",
           "type": "show",
-          "land": "Amphithéâtre",
+          "land": "Amphitheater",
           "duration": 30,
           "rideType": "night show",
           "popularity": 4.45,
@@ -404,7 +404,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z5-004",
           "time": "21:25",
-          "name": "Sortie HS",
+          "name": "Exit HS",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -416,7 +416,7 @@ export const hs: DayTemplate = {
         {
           "id": "hs-z5-005",
           "time": "22:00",
-          "name": "Retour hébergement",
+          "name": "Return to hotel",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -429,6 +429,6 @@ export const hs: DayTemplate = {
     }
   ],
   "alerts": [
-    "⚠️ Achats 15/04 à 7h00 : SP Rise of the Resistance | MP réservé 12/04 : Slinky Dog + Tower + Toy Story"
+    "⚠️ Purchases 04/15 at 7:00 AM: SP Rise of the Resistance | MP reserved 04/12: Slinky Dog + Tower + Toy Story"
   ]
 };

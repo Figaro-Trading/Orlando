@@ -5,7 +5,7 @@ export const ioa: DayTemplate = {
   "label": "Islands of Adventure",
   "park": "ioa",
   "openingHours": "",
-  "coupefile": "Express ~$150/pers",
+  "skipPass": "Express ~$150/pers",
   "zones": [
     {
       "number": 1,
@@ -14,7 +14,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z1-000",
           "time": "09:00",
-          "name": "Départ hébergement",
+          "name": "Leave hotel",
           "type": "logistics",
           "isNew": false,
           "isReride": false,
@@ -26,7 +26,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z1-001",
           "time": "09:45",
-          "name": "Entrée IoA → direction DROITE (Marvel)",
+          "name": "Enter IoA → turn RIGHT (Marvel)",
           "type": "logistics",
           "land": "Port of Entry",
           "isNew": false,
@@ -44,7 +44,7 @@ export const ioa: DayTemplate = {
           "land": "Marvel Island",
           "duration": 2,
           "rideType": "coaster",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 4.38,
           "estimatedWait": 22,
           "rating": 4.37,
@@ -64,7 +64,7 @@ export const ioa: DayTemplate = {
           "land": "Marvel Island",
           "duration": 5,
           "rideType": "dark ride",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 4.95,
           "estimatedWait": 27,
           "rating": 4.49,
@@ -85,7 +85,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z2-000",
           "time": "10:40",
-          "name": "Marche Marvel → Skull Island (via Toon Lagoon)",
+          "name": "Walk Marvel → Skull Island (via Toon Lagoon)",
           "type": "walk",
           "duration": 8,
           "isNew": false,
@@ -103,7 +103,7 @@ export const ioa: DayTemplate = {
           "land": "Skull Island",
           "duration": 5,
           "rideType": "dark ride",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 5.5,
           "estimatedWait": 35,
           "rating": 4.3,
@@ -118,7 +118,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z2-002",
           "time": "11:20",
-          "name": "Marche → Jurassic World",
+          "name": "Walk → Jurassic World",
           "type": "walk",
           "duration": 3,
           "isNew": false,
@@ -136,7 +136,7 @@ export const ioa: DayTemplate = {
           "land": "Jurassic World",
           "duration": 2,
           "rideType": "coaster",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 8.95,
           "estimatedWait": 65,
           "rating": 4.9,
@@ -157,7 +157,7 @@ export const ioa: DayTemplate = {
           "land": "Jurassic World",
           "duration": 3,
           "rideType": "family",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 4.2,
           "estimatedWait": 20,
           "rating": 4.1,
@@ -173,12 +173,12 @@ export const ioa: DayTemplate = {
     },
     {
       "number": 3,
-      "label": "HOGSMEADE (on y reste!)",
+      "label": "HOGSMEADE (staying here!)",
       "entries": [
         {
           "id": "ioa-z3-000",
           "time": "12:25",
-          "name": "Marche Jurassic → Hogsmeade",
+          "name": "Walk Jurassic → Hogsmeade",
           "type": "walk",
           "duration": 5,
           "isNew": false,
@@ -196,7 +196,7 @@ export const ioa: DayTemplate = {
           "land": "Hogsmeade",
           "duration": 4,
           "rideType": "coaster",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 10,
           "estimatedWait": 95,
           "rating": 4.9,
@@ -216,7 +216,7 @@ export const ioa: DayTemplate = {
           "land": "Hogsmeade",
           "duration": 5,
           "rideType": "dark ride",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 5.62,
           "estimatedWait": 33,
           "rating": 4.64,
@@ -236,7 +236,7 @@ export const ioa: DayTemplate = {
           "land": "Hogsmeade",
           "duration": 1,
           "rideType": "family",
-          "coupefile": "Express",
+          "skipPass": "Express",
           "popularity": 5.84,
           "estimatedWait": 35,
           "rating": 4.68,
@@ -251,7 +251,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z3-004",
           "time": "14:00",
-          "name": "Déjeuner Three Broomsticks",
+          "name": "Lunch Three Broomsticks",
           "type": "meal",
           "land": "Hogsmeade",
           "duration": 50,
@@ -265,7 +265,7 @@ export const ioa: DayTemplate = {
         {
           "id": "ioa-z3-005",
           "time": "14:55",
-          "name": "Exploration Hogsmeade (boutiques, Ollivanders)",
+          "name": "Explore Hogsmeade (shops, Ollivanders)",
           "type": "explore",
           "land": "Hogsmeade",
           "duration": 35,
@@ -284,7 +284,7 @@ export const ioa: DayTemplate = {
           "land": "Hogsmeade",
           "duration": 8,
           "rideType": "transport",
-          "coupefile": "—",
+          "skipPass": "—",
           "popularity": 5.06,
           "estimatedWait": 28,
           "rating": 4.52,
@@ -300,6 +300,6 @@ export const ioa: DayTemplate = {
     }
   ],
   "alerts": [
-    "⚠️ Fiabilité douteuse — si fermé, continuer!"
+    "⚠️ Unreliable — if closed, skip!"
   ]
 };

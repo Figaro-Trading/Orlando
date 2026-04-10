@@ -26,14 +26,14 @@ export function ExitPicker({
 }: ExitPickerProps) {
   const buttonLabel =
     selectedId === "none"
-      ? "Recommander"
+      ? "What's next"
       : selectedId
-        ? "Fait ! → Recommander"
-        : "Choisir d'abord";
+        ? "Done! → What's next"
+        : "Pick one first";
 
   return (
     <div class="exit-picker">
-      <div class="exit-picker-title">Tu sors de quoi ?</div>
+      <div class="exit-picker-title">What did you just finish?</div>
 
       {gpsAvailable && candidates.length > 0 ? (
         candidates.map((c) => (
@@ -53,8 +53,8 @@ export function ExitPicker({
         <>
           <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.5rem;">
             {gpsAvailable
-              ? "Aucune attraction à proximité"
-              : "GPS non disponible — sélection manuelle"}
+              ? "No nearby attractions"
+              : "GPS unavailable — manual selection"}
           </div>
           {currentZoneEntries
             ?.filter(isActionable)
@@ -75,7 +75,7 @@ export function ExitPicker({
         class={`exit-option ${selectedId === "none" ? "selected" : ""}`}
         onClick={() => onSelect("none")}
       >
-        <span class="exit-name">Rien / Autre</span>
+        <span class="exit-name">Skip / Other</span>
       </div>
 
       <button

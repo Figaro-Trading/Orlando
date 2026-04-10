@@ -16,16 +16,16 @@ function NavItem({ view, icon, label }: { view: AppView; icon: string; label: st
 export function NavBar() {
   return (
     <nav class="navbar">
-      <NavItem view="dashboard" icon="📊" label="Accueil" />
-      <NavItem view="park" icon="🏰" label="Parc" />
+      <NavItem view="dashboard" icon="📊" label="Today" />
+      <NavItem view="park" icon="🏰" label="Live" />
       <button
         class="nav-item next-btn"
         onClick={() => { currentView.value = "nextmove"; }}
       >
         Next?
       </button>
-      <NavItem view="planning" icon="📅" label="Planning" />
-      <NavItem view="settings" icon="⚙️" label="Réglages" />
+      <NavItem view="planning" icon="📅" label="Plan" />
+      <NavItem view="settings" icon="⚙️" label="Settings" />
     </nav>
   );
 }

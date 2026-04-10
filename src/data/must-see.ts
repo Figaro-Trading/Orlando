@@ -151,7 +151,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "→ J4-A à ~15h00 (seule représentation). Insérer entre Goûter Aloha (15:35) et PeopleMover (16:10). Visionner depuis Frontierland."
+    "suggestion": "→ J4-A at ~3pm (only performance). Insert between Snack Aloha (3:35pm) and PeopleMover (4:10pm). Watch from Frontierland."
   },
   {
     "name": "Rise of the Resistance",
@@ -717,7 +717,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "→ J7 PM Epic (19h20-20h40 Isle of Berk). Insérer show 20 min pendant segment sunset Isle of Berk. Horaires à vérifier sur place."
+    "suggestion": "→ J7 PM Epic (7:20-8:40pm Isle of Berk). Insert 20 min show during sunset Isle of Berk segment. Check times on-site."
   },
   {
     "name": "Flight of Passage",
@@ -781,7 +781,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "→ J7 AK à 12:30 (après Kali, avant déjeuner). Show 3D ~20 min à Discovery Island. Remplace It's Tough to be a Bug."
+    "suggestion": "→ J7 AK at 12:30 (after Kali, before lunch). 3D show ~20 min at Discovery Island. Replaces It's Tough to be a Bug."
   },
   {
     "name": "Maharajah Jungle Trek",
@@ -791,7 +791,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "→ J7 AK : intégrer 15 min après Everest (12:00). Trail self-guided en zone Asia, sans file d'attente."
+    "suggestion": "→ J7 AK: add 15 min after Everest (12:00). Self-guided trail in Asia area, no queue."
   },
   {
     "name": "Gorilla Falls Trail",
@@ -801,7 +801,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "→ J7 AK : intégrer 15 min après Safaris (10:50). Trail self-guided en zone Africa, sortie Safaris directe."
+    "suggestion": "→ J7 AK: add 15 min after Safaris (10:50). Self-guided trail in Africa area, direct Safaris exit."
   },
   {
     "name": "Tree of Life Awakenings",
@@ -811,7 +811,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "Projection NOCTURNE → impossible car départ AK à 13h30. Alternative : admirer le Tree of Life de jour à Discovery Island (12:55)."
+    "suggestion": "NIGHT projection → impossible, leaving AK at 1:30pm. Alternative: admire Tree of Life during daytime at Discovery Island (12:55)."
   },
   {
     "name": "Pandora at Night",
@@ -821,18 +821,18 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": [
       "—"
     ],
-    "suggestion": "Bioluminescence NOCTURNE → impossible car départ AK à 13h30. Pandora reste spectaculaire de jour."
+    "suggestion": "NIGHT bioluminescence → impossible, leaving AK at 1:30pm. Pandora is still spectacular during daytime."
   },
   {
-    "name": "SYNTHÈSE DES PROPOSITIONS DE CRÉNEAUX",
+    "name": "TIMESLOT PROPOSALS SUMMARY",
     "park": "",
     "priority": "recommended",
     "isPlanned": false,
     "plannedDays": []
   },
   {
-    "name": "Activité",
-    "park": "jour / parc",
+    "name": "Activity",
+    "park": "day / park",
     "priority": "recommended",
     "isPlanned": false,
     "plannedDays": []
@@ -873,7 +873,7 @@ export const MUST_SEE: MustSeeItem[] = [
     "plannedDays": []
   },
   {
-    "name": "SCORE GLOBAL : 72 must-see référencés | 67 planifiés ✅ (93%) | 5 propositions d'ajout ❌ | 2 impossibles structurels ⚠️",
+    "name": "GLOBAL SCORE: 72 must-see listed | 67 planned ✅ (93%) | 5 add proposals ❌ | 2 structural impossibilities ⚠️",
     "park": "",
     "priority": "recommended",
     "isPlanned": false,

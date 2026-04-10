@@ -6,42 +6,42 @@ export const PARK_ALERTS: ParkAlert[] = [
     "type": "closure",
     "park": "mk",
     "attraction": "Big Thunder Mountain",
-    "message": "FERMÉ jusqu'à début mai 2026",
+    "message": "CLOSED until early May 2026",
     "severity": "critical"
   },
   {
     "type": "closure",
     "park": "hs",
     "attraction": "Rock'n'Roller Coaster",
-    "message": "FERMÉ pour transformation Muppets",
+    "message": "CLOSED for Muppets retheme",
     "severity": "critical"
   },
   {
     "type": "closure",
     "park": "ak",
     "attraction": "DINOSAUR",
-    "message": "FERMÉ définitivement (février 2026)",
+    "message": "Permanently CLOSED (Feb 2026)",
     "severity": "critical"
   },
   {
     "type": "closure",
     "park": "ak",
     "attraction": "Conservation Station",
-    "message": "FERMÉE jusqu'au 26 mai 2026",
+    "message": "CLOSED until May 26, 2026",
     "severity": "critical"
   },
   {
     "type": "rule",
     "park": "epic",
     "attraction": "️ Stardust Racers",
-    "message": "52\" = 132 cm — VÉRIFIER!",
+    "message": "52\" = 132 cm — CHECK!",
     "severity": "warning"
   },
   {
     "type": "rule",
     "park": "ioa",
     "attraction": "️ VelociCoaster",
-    "message": "51\" = 130 cm — VÉRIFIER!",
+    "message": "51\" = 130 cm — CHECK!",
     "severity": "warning"
   },
   {

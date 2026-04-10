@@ -144,7 +144,7 @@ export function NextMoveOverlay() {
           ✕
         </button>
         <div style="padding:3rem 1rem;text-align:center;color:var(--muted);">
-          Pas de jour parc aujourd'hui
+          No park day today
         </div>
       </div>
     );
@@ -165,7 +165,7 @@ export function NextMoveOverlay() {
   return (
     <div class="overlay">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <span style="font-size:1.1rem;font-weight:700;">Que fait-on ?</span>
+        <span style="font-size:1.1rem;font-weight:700;">What's next?</span>
         <button class="overlay-close" style="position:static;" onClick={handleClose}>
           ✕
         </button>
@@ -201,14 +201,14 @@ export function NextMoveOverlay() {
             !result.value.bestOverallChoice &&
             result.value.nearbyOptions.length === 0 && (
               <div style="padding:2rem;text-align:center;color:var(--muted);">
-                Toutes les activités sont terminées ou fermées !
+                All done for today!
               </div>
             )}
         </>
       ) : (
         <div class="loading">
           <div class="spinner" />
-          <div>Calcul en cours...</div>
+          <div>Finding your next move...</div>
         </div>
       )}
     </div>

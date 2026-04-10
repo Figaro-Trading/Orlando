@@ -73,18 +73,18 @@ export function exclusionReason(
     context.completedIds.has(entityId) ||
     (planEntry && context.completedIds.has(planEntry.id))
   ) {
-    return "Déjà fait";
+    return "Already done";
   }
 
   if (liveData && liveData.status !== "OPERATING") {
-    if (liveData.status === "DOWN") return "Attraction en panne";
-    if (liveData.status === "CLOSED") return "Fermée actuellement";
-    if (liveData.status === "REFURBISHMENT") return "En rénovation";
+    if (liveData.status === "DOWN") return "Ride is down";
+    if (liveData.status === "CLOSED") return "Currently closed";
+    if (liveData.status === "REFURBISHMENT") return "Under rehab";
   }
 
   const waitTime = liveData?.queue?.STANDBY?.waitTime;
   if (waitTime != null && waitTime > context.maxWaitThreshold) {
-    return `Attente trop élevée (${waitTime} min > seuil de ${context.maxWaitThreshold} min)`;
+    return `Wait too long (${waitTime} min > ${context.maxWaitThreshold} min threshold)`;
   }
 
   if (
@@ -96,11 +96,11 @@ export function exclusionReason(
         a.severity === "critical",
     )
   ) {
-    return "Fermeture confirmée";
+    return "Confirmed closure";
   }
 
   if (context.parkClosingTime && context.now >= context.parkClosingTime) {
-    return "Le parc est fermé";
+    return "Park is closed";
   }
 
   return null;

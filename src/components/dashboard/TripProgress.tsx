@@ -14,7 +14,7 @@ export function TripProgress({ totalEntries }: TripProgressProps) {
         <div class="progress-bar">
           <div class="progress-fill" style={`width:${pct}%`} />
         </div>
-        <span class="progress-label">{completed}/{totalEntries} activités</span>
+        <span class="progress-label">{completed}/{totalEntries} activities</span>
       </div>
     </div>
   );

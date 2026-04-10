@@ -54,8 +54,8 @@ export function scoreEntity(input: ScoringInput): number {
 
   if (input.planEntry?.isReride) score += W.rerideDiscount;
 
-  if (input.planEntry?.coupefile) {
-    score -= W.coupefileBonus[input.planEntry.coupefile] ?? 0;
+  if (input.planEntry?.skipPass) {
+    score -= W.skipPassBonus[input.planEntry.skipPass] ?? 0;
   }
 
   if (input.parkClosingTime) {
