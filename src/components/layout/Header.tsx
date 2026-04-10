@@ -10,7 +10,7 @@ export function Header() {
 
   const ts = liveTimestamps.value[pk];
   const lastUpdate = ts
-    ? `Updated ${new Date(ts).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`
+    ? `Updated ${new Date(ts).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}`
     : "";
 
   const isStale = isStaleLive.value[pk] ?? false;

@@ -320,7 +320,7 @@ export function computeNextMove(input: NextMoveInput): NextMoveResult {
     currentPark: plan.activePark,
     currentLand: plan.currentZoneLabel ?? input.manualLand ?? undefined,
     currentZone: plan.currentZone ?? undefined,
-    currentTime: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
+    currentTime: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }),
     gpsPosition: input.userLat != null && input.userLon != null ? { lat: input.userLat, lon: input.userLon } : undefined,
     skippedPlannedItemIds,
     blockingFactors,
