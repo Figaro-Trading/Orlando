@@ -204,7 +204,7 @@ export function NextMoveOverlay() {
     <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-title" ref={overlayRef} tabIndex={-1}>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
         <span id="overlay-title" style="font-size:1.1rem;font-weight:700;">What's next?</span>
-        <button class="overlay-close" style="position:static;" aria-label="Close" onClick={handleClose}>
+        <button class="overlay-close overlay-close--flow" aria-label="Close" onClick={handleClose}>
           ✕
         </button>
       </div>
