@@ -82,6 +82,19 @@ export function Settings() {
           Reset progress
         </button>
       </div>
+
+      <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.7rem;color:var(--low);text-align:center;">
+        Live data by{" "}
+        <a href="https://themeparks.wiki/" target="_blank" rel="noopener noreferrer"
+          style="color:var(--accent);text-decoration:underline;">
+          ThemeParks.wiki
+        </a>
+        {" "}&middot;{" "}
+        <a href="https://github.com/Figaro-Trading/Orlando.git" target="_blank" rel="noopener noreferrer"
+          style="color:var(--accent);text-decoration:underline;">
+          Source
+        </a>
+      </div>
     </div>
   );
 }

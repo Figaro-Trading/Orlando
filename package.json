@@ -3,6 +3,19 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "description": "Real-time PWA assistant for Walt Disney World and Universal Orlando parks — wait times, schedules, and smart planning",
+  "keywords": ["orlando", "disney", "universal", "theme-park", "wait-times", "pwa", "preact"],
+  "license": "GPL-3.0-only",
+  "author": "Figaro-Trading",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Figaro-Trading/Orlando.git"
+  },
+  "homepage": "https://figaro-trading.github.io/Orlando/",
+  "bugs": "https://github.com/Figaro-Trading/Orlando/issues",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

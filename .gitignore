@@ -6,4 +6,5 @@ dist/
 .env
 .env.*
 dev-dist/
+.vite/
 docs/DEPLOY.md
