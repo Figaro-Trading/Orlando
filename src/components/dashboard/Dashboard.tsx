@@ -1,12 +1,12 @@
-import { activeParkKey } from "../../state/app-state";
+import { activeTemplateId, activeParkKey } from "../../state/app-state";
 import { completedIds, markCompleted, removeCompletion } from "../../state/user-progress";
 import { userPosition } from "../../state/geo-state";
 import { ALL_TEMPLATES } from "../../data/templates";
-import { PARKS } from "../../data/parks";
+import { PARKS, TEMPLATE_TO_PARK } from "../../data/parks";
 import { TripProgress } from "./TripProgress";
 import { AlertBanner } from "./AlertBanner";
 import { NextMoveButton } from "./NextMoveButton";
-import type { PlanEntry, ParkKey } from "../../types";
+import type { PlanEntry, TemplateKey } from "../../types";
 
 const TYPE_LABELS: Record<string, string> = {
   ride: "Ride",
@@ -31,8 +31,9 @@ function isActionable(type: string): boolean {
 }
 
 export function Dashboard() {
-  const pk = activeParkKey.value as ParkKey;
-  const template = ALL_TEMPLATES[pk];
+  const tk = activeTemplateId.value as TemplateKey;
+  const pk = TEMPLATE_TO_PARK[tk] ?? activeParkKey.value;
+  const template = ALL_TEMPLATES[tk];
 
   if (!template) {
     return (

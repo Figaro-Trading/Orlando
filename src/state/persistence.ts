@@ -13,7 +13,7 @@ import {
   activeTemplateId,
 } from "./app-state";
 import type { AppView, EntityFilters } from "./app-state";
-import { ALL_TEMPLATES } from "../data/templates";
+import { ALL_TEMPLATES, TEMPLATE_KEYS } from "../data/templates";
 import { todayOrlando } from "../utils/time";
 import {
   liveData,
@@ -23,8 +23,8 @@ import {
   schedTimestamps,
   locationTimestamps,
 } from "./live-cache";
-import { PARKS } from "../data/parks";
-import type { CompletionEvent, ParkKey } from "../types";
+import { PARKS, TEMPLATE_TO_PARK } from "../data/parks";
+import type { CompletionEvent, ParkKey, TemplateKey } from "../types";
 
 // ── Hydration ────────────────────────────────────────────
 
@@ -175,9 +175,18 @@ function purgeOldCompletions(): void {
 }
 
 function resolveActiveTemplate(): void {
+  // Try restoring persisted template ID first
+  const rawTemplate = localStorage.getItem("orl:activeTemplateId");
+  if (rawTemplate && rawTemplate in ALL_TEMPLATES) {
+    activeTemplateId.value = rawTemplate;
+    activeParkKey.value = TEMPLATE_TO_PARK[rawTemplate as TemplateKey];
+    return;
+  }
+  // Fallback: find first template matching the active park
   const pk = activeParkKey.value;
-  if (ALL_TEMPLATES[pk]) {
-    activeTemplateId.value = pk;
+  const tk = TEMPLATE_KEYS.find((k) => TEMPLATE_TO_PARK[k] === pk);
+  if (tk) {
+    activeTemplateId.value = tk;
   }
 }
 
@@ -200,11 +209,12 @@ export function startPersistence(): void {
     safeWrite("orl:themeMode", themeMode.value);
   });
 
-  // Sync activeTemplateId when activeParkKey changes
+  // Sync activeParkKey when activeTemplateId changes
   effect(() => {
-    const pk = activeParkKey.value;
-    if (ALL_TEMPLATES[pk]) {
-      activeTemplateId.value = pk;
+    const tk = activeTemplateId.value as TemplateKey;
+    if (tk && tk in ALL_TEMPLATES) {
+      activeParkKey.value = TEMPLATE_TO_PARK[tk];
+      safeWrite("orl:activeTemplateId", tk);
     }
   });
 

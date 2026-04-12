@@ -1,4 +1,4 @@
-import type { ParkConfig, ParkKey } from "../types";
+import type { ParkConfig, ParkKey, TemplateKey } from "../types";
 
 export const PARKS: Record<ParkKey, ParkConfig> = {
   mk: {
@@ -46,3 +46,17 @@ export const PARKS: Record<ParkKey, ParkConfig> = {
 };
 
 export const PARK_KEYS: ParkKey[] = ["mk", "epcot", "hs", "ak", "usf", "ioa", "epic"];
+
+export const TEMPLATE_KEYS: TemplateKey[] = ["hs", "mk1", "mk2", "epcot", "ioa", "usf", "epic1", "epic2", "ak"];
+
+export const TEMPLATE_TO_PARK: Record<TemplateKey, ParkKey> = {
+  hs: "hs",
+  mk1: "mk",
+  mk2: "mk",
+  epcot: "epcot",
+  ioa: "ioa",
+  usf: "usf",
+  epic1: "epic",
+  epic2: "epic",
+  ak: "ak",
+};

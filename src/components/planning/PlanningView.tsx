@@ -1,15 +1,27 @@
-import { activeParkKey } from "../../state/app-state";
-import { PARKS, PARK_KEYS } from "../../data/parks";
+import { activeTemplateId, activeParkKey } from "../../state/app-state";
+import { PARKS, TEMPLATE_KEYS, TEMPLATE_TO_PARK } from "../../data/parks";
 import { LANDS } from "../../data/lands";
 import { ALL_TEMPLATES } from "../../data/templates";
 import { userPlans, addPlanRow, removePlanRow, updatePlanRow, resetParkPlan } from "../../state/user-plan";
-import type { ParkKey, PlanEntry } from "../../types";
+import type { TemplateKey, PlanEntry } from "../../types";
 
 const EMPTY_VALUE = "__empty__";
 
-function makePlanEntry(parkKey: ParkKey, name: string, land: string): PlanEntry {
+const TAB_LABELS: Record<TemplateKey, string> = {
+  hs: "HS",
+  mk1: "MK \u2460",
+  mk2: "MK \u2461",
+  epcot: "EPCOT",
+  ioa: "IOA",
+  usf: "USF",
+  epic1: "EPIC \u2460",
+  epic2: "EPIC \u2461",
+  ak: "AK",
+};
+
+function makePlanEntry(templateKey: TemplateKey, name: string, land: string): PlanEntry {
   return {
-    id: `${parkKey}-custom-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    id: `${templateKey}-custom-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     name,
     type: "ride",
     land,
@@ -23,17 +35,18 @@ function makePlanEntry(parkKey: ParkKey, name: string, land: string): PlanEntry 
 }
 
 export function PlanningView() {
-  const pk = activeParkKey.value as ParkKey;
-  const plan = userPlans.value[pk] ?? [];
+  const tk = activeTemplateId.value as TemplateKey;
+  const pk = TEMPLATE_TO_PARK[tk] ?? activeParkKey.value;
+  const plan = userPlans.value[tk] ?? [];
   const lands = LANDS[pk] ?? {};
 
-  const handleParkChange = (key: ParkKey) => {
-    activeParkKey.value = key;
+  const handleTemplateChange = (key: TemplateKey) => {
+    activeTemplateId.value = key;
+    activeParkKey.value = TEMPLATE_TO_PARK[key];
   };
 
   const handleRowChange = (index: number, value: string) => {
     if (value === EMPTY_VALUE) return;
-    // Find the land for this activity
     let foundLand = "";
     for (const [landName, activities] of Object.entries(lands)) {
       if (activities.includes(value)) {
@@ -41,36 +54,36 @@ export function PlanningView() {
         break;
       }
     }
-    const entry = makePlanEntry(pk, value, foundLand);
-    updatePlanRow(pk, index, entry);
+    const entry = makePlanEntry(tk, value, foundLand);
+    updatePlanRow(tk, index, entry);
   };
 
   const handleAdd = () => {
-    const entry = makePlanEntry(pk, "", "");
-    addPlanRow(pk, entry);
+    const entry = makePlanEntry(tk, "", "");
+    addPlanRow(tk, entry);
   };
 
   const handleRemove = (index: number) => {
-    removePlanRow(pk, index);
+    removePlanRow(tk, index);
   };
 
   const handleReset = () => {
     if (confirm("Reset plan to default template?")) {
-      resetParkPlan(pk);
+      resetParkPlan(tk);
     }
   };
 
   return (
     <div class="panel active">
-      {/* Park tabs */}
+      {/* Template tabs */}
       <div class="plan-tabs">
-        {PARK_KEYS.map((k) => (
+        {TEMPLATE_KEYS.map((k) => (
           <button
             key={k}
-            class={`plan-tab ${k === pk ? "active" : ""}`}
-            onClick={() => handleParkChange(k)}
+            class={`plan-tab ${k === tk ? "active" : ""}`}
+            onClick={() => handleTemplateChange(k)}
           >
-            {PARKS[k].short}
+            {TAB_LABELS[k]}
           </button>
         ))}
       </div>

@@ -177,6 +177,8 @@ export type ParkConfig = {
 
 export type ParkKey = "mk" | "epcot" | "hs" | "ak" | "usf" | "ioa" | "epic";
 
+export type TemplateKey = "hs" | "mk1" | "mk2" | "epcot" | "ioa" | "usf" | "epic1" | "epic2" | "ak";
+
 export type LandsMap = Record<string, string[]>;
 
 // ─��────────────────────────────────────

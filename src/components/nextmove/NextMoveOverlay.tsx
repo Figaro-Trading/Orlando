@@ -22,7 +22,7 @@ import {
   suggestExitCandidate,
 } from "../../engine/nearby";
 import { switchToHighAccuracy, switchToLowAccuracy } from "../../services/geolocation";
-import type { NextMoveResult, PlanEntry, ParkKey } from "../../types";
+import type { NextMoveResult, PlanEntry, ParkKey, TemplateKey } from "../../types";
 import type { NearbyCandidate } from "../../engine/nearby";
 import { ExitPicker } from "./ExitPicker";
 import { BlockA } from "./BlockA";
@@ -38,7 +38,7 @@ export function NextMoveOverlay() {
   const exitCandidates = useSignal<NearbyCandidate[]>([]);
   const suggestedExit = useSignal<NearbyCandidate | null>(null);
 
-  const templateId = activeTemplateId.value as ParkKey;
+  const templateId = activeTemplateId.value as TemplateKey;
   const template = templateId ? ALL_TEMPLATES[templateId] ?? null : null;
 
   const overlayRef = useRef<HTMLDivElement>(null);

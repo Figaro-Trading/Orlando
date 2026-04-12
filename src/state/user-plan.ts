@@ -1,69 +1,68 @@
 import { signal, computed } from "@preact/signals";
-import { ALL_TEMPLATES } from "../data/templates";
-import { activeParkKey } from "./app-state";
-import { PARK_KEYS } from "../data/parks";
-import type { PlanEntry, ParkKey } from "../types";
+import { ALL_TEMPLATES, TEMPLATE_KEYS } from "../data/templates";
+import { activeTemplateId } from "./app-state";
+import type { PlanEntry, TemplateKey } from "../types";
 
 // Build default plans from templates
-function buildDefaultPlans(): Record<ParkKey, PlanEntry[]> {
-  const plans = {} as Record<ParkKey, PlanEntry[]>;
-  for (const pk of PARK_KEYS) {
-    const template = ALL_TEMPLATES[pk];
+function buildDefaultPlans(): Record<TemplateKey, PlanEntry[]> {
+  const plans = {} as Record<TemplateKey, PlanEntry[]>;
+  for (const tk of TEMPLATE_KEYS) {
+    const template = ALL_TEMPLATES[tk];
     if (template) {
-      plans[pk] = template.zones.flatMap((z) =>
+      plans[tk] = template.zones.flatMap((z) =>
         z.entries.filter((e) => !["walk", "transport", "logistics", "alert"].includes(e.type))
       );
     } else {
-      plans[pk] = [];
+      plans[tk] = [];
     }
   }
   return plans;
 }
 
-export const userPlans = signal<Record<ParkKey, PlanEntry[]>>(buildDefaultPlans());
+export const userPlans = signal<Record<TemplateKey, PlanEntry[]>>(buildDefaultPlans());
 
-export const activePlan = computed(() => userPlans.value[activeParkKey.value] ?? []);
+export const activePlan = computed(() => userPlans.value[activeTemplateId.value as TemplateKey] ?? []);
 
-export function initParkPlan(parkKey: ParkKey): void {
-  const template = ALL_TEMPLATES[parkKey];
+export function initParkPlan(templateKey: TemplateKey): void {
+  const template = ALL_TEMPLATES[templateKey];
   if (!template) return;
   const entries = template.zones.flatMap((z) =>
     z.entries.filter((e) => !["walk", "transport", "logistics", "alert"].includes(e.type))
   );
-  userPlans.value = { ...userPlans.value, [parkKey]: entries };
+  userPlans.value = { ...userPlans.value, [templateKey]: entries };
 }
 
-export function resetParkPlan(parkKey: ParkKey): void {
-  initParkPlan(parkKey);
+export function resetParkPlan(templateKey: TemplateKey): void {
+  initParkPlan(templateKey);
 }
 
-export function addPlanRow(parkKey: ParkKey, entry: PlanEntry, index?: number): void {
-  const current = [...(userPlans.value[parkKey] ?? [])];
+export function addPlanRow(templateKey: TemplateKey, entry: PlanEntry, index?: number): void {
+  const current = [...(userPlans.value[templateKey] ?? [])];
   if (index !== undefined && index >= 0 && index <= current.length) {
     current.splice(index, 0, entry);
   } else {
     current.push(entry);
   }
-  userPlans.value = { ...userPlans.value, [parkKey]: current };
+  userPlans.value = { ...userPlans.value, [templateKey]: current };
 }
 
-export function removePlanRow(parkKey: ParkKey, index: number): void {
-  const current = [...(userPlans.value[parkKey] ?? [])];
+export function removePlanRow(templateKey: TemplateKey, index: number): void {
+  const current = [...(userPlans.value[templateKey] ?? [])];
   if (index >= 0 && index < current.length) {
     current.splice(index, 1);
-    userPlans.value = { ...userPlans.value, [parkKey]: current };
+    userPlans.value = { ...userPlans.value, [templateKey]: current };
   }
 }
 
-export function updatePlanRow(parkKey: ParkKey, index: number, entry: PlanEntry): void {
-  const current = [...(userPlans.value[parkKey] ?? [])];
+export function updatePlanRow(templateKey: TemplateKey, index: number, entry: PlanEntry): void {
+  const current = [...(userPlans.value[templateKey] ?? [])];
   if (index >= 0 && index < current.length) {
     current[index] = entry;
-    userPlans.value = { ...userPlans.value, [parkKey]: current };
+    userPlans.value = { ...userPlans.value, [templateKey]: current };
   }
 }
 
-export function isPlanEntryInPlan(parkKey: ParkKey, entryName: string): boolean {
-  const plan = userPlans.value[parkKey] ?? [];
+export function isPlanEntryInPlan(templateKey: TemplateKey, entryName: string): boolean {
+  const plan = userPlans.value[templateKey] ?? [];
   return plan.some((e) => e.name === entryName);
 }

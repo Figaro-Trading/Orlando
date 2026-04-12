@@ -9,7 +9,7 @@ import { TYPE_LBL } from "../../data/labels";
 import { WaitBadge } from "../shared/WaitBadge";
 import { StatusBadge } from "../shared/StatusBadge";
 import { ShowtimePills } from "../shared/ShowtimePills";
-import type { LiveEntity, ParkKey, PlanEntry } from "../../types";
+import type { LiveEntity, ParkKey, TemplateKey, PlanEntry } from "../../types";
 
 interface Props { entity: LiveEntity; parkKey: ParkKey; }
 
@@ -21,15 +21,16 @@ export function EntityCard({ entity, parkKey }: Props) {
   const bg = entity.queue?.BOARDING_GROUP;
 
   // Enriched data from template
-  const template = getTemplate(activeTemplateId.value);
+  const tk = activeTemplateId.value as TemplateKey;
+  const template = getTemplate(tk);
   const planEntry = template ? findPlanEntryForEntityId(entity.id, template) : null;
-  const isInPlan = isPlanEntryInPlan(parkKey, entity.name);
+  const isInPlan = isPlanEntryInPlan(tk, entity.name);
 
   const handleAddToPlan = (e: Event) => {
     e.stopPropagation();
     const land = findLand(parkKey, entity.name) ?? "";
     const entry: PlanEntry = {
-      id: `${parkKey}-add-${Date.now()}`,
+      id: `${tk}-add-${Date.now()}`,
       name: entity.name,
       type: entity.entityType === "SHOW" ? "show" : entity.entityType === "RESTAURANT" ? "meal" : "ride",
       land,
@@ -45,7 +46,7 @@ export function EntityCard({ entity, parkKey }: Props) {
       isOptional: false,
       isRopeDrop: false,
     };
-    addPlanRow(parkKey, entry);
+    addPlanRow(tk, entry);
   };
 
   return (

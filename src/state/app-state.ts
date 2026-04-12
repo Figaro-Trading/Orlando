@@ -22,4 +22,4 @@ export const filters = signal<EntityFilters>({
 export const maxWaitThreshold = signal<number>(90);
 export const maxPopularityThreshold = signal<number>(10);
 export const themeMode = signal<"light" | "dark" | "auto">("dark");
-export const activeTemplateId = signal<string>("");
+export const activeTemplateId = signal<string>("hs");
