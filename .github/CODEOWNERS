@@ -1,0 +1,8 @@
+# CODEOWNERS for Figaro-Trading/Orlando
+# Docs: https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+#
+# When a PR is opened, GitHub auto-requests review from the matching owner(s).
+# The last matching pattern wins, so put more specific rules below the fallback.
+
+# Fallback — Figaro-Trading owns everything by default
+*       @Figaro-Trading
