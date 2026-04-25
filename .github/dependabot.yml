@@ -5,4 +5,60 @@ updates:
     directory: /
     schedule:
       interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Paris
     open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - automated
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: scope
+    groups:
+      preact:
+        patterns:
+          - "preact"
+          - "@preact/*"
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+      workbox:
+        patterns:
+          - "workbox-*"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+      - automated
+    commit-message:
+      prefix: "chore(ci)"
+      include: scope
+    groups:
+      actions:
+        patterns:
+          - "*"
